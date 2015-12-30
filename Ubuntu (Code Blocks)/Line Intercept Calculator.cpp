@@ -43,6 +43,6 @@ else
     cin>>y2;
 }
 x=(y2-y1)/(s-s2);
-y3=(s-s2)*x+(y2-y1);
+y3=(s-s2)*x+y2;
 cout<<"\nThe point of intersection is ("<<x<<","<<y3<<").";
 }
