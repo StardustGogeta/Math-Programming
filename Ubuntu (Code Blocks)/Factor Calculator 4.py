@@ -1,13 +1,14 @@
 import math
 
-def calculate(n):
+def convert(n):
     if n > 0:
+        numbers=[]
         for d in range(1, int(math.sqrt(n))+1):
             if (n % d == 0):
-                print(int(n/d), "\n", d)
-        print("The list of factors has been successfully generated.\n")
+                numbers.append(int(n/d))
+                numbers.append(d)
+        return(numbers)
     else:
-        print("Are you trying to kill me?\nYou will pay for that.\n")
-    return 0
+        return("Error!")
 
-calculate(int(input("What is the number?\n")))
+#convert(int(input("What is the number?\n")))
