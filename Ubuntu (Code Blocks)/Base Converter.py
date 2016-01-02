@@ -1,8 +1,8 @@
 from math import *
 
-def converter(fN,fB,sB):
+def convert(fN,fB,sB):
     if int(fB)>10 or int(fB)<2 or int(sB)>10 or int(sB)<2:
-        print("\nStop wasting time.\n")
+        return("\nStop wasting time.")
     else:
         tVT=0
         while fN>0:
@@ -22,9 +22,8 @@ def converter(fN,fB,sB):
             tVTN=int(tVT)%dV
             sN+=(tVT-tVTN)*10**Z/dV
             tVT=tVTN
-        print('Your number is ',int(sN),'.')
-    return 0
+        return(int(sN))
 
-converter(int(input("What is the number?\n")),
-          int(input("What is the current base? (1 < x < 11)\n")),
-          int(input("What is the desired base? (1 < x < 11)\n")))
+#convert(int(input("What is the number?\n")),
+#          int(input("What is the current base? (1 < x < 11)\n")),
+#          int(input("What is the desired base? (1 < x < 11)\n")))
