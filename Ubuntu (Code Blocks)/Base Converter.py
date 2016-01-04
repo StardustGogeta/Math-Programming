@@ -2,7 +2,7 @@ from math import *
 
 def convert(fN,fB,sB):
     if int(fB)>10 or int(fB)<2 or int(sB)>10 or int(sB)<2:
-        return("\nStop wasting time.")
+        return("Stop wasting time.")
     else:
         tVT=0
         while fN>0:
