@@ -12,7 +12,7 @@ def convert(fN,fB,sB):
             print(tVT)
         return(sN[::-1])
     except ValueError:
-        return("Stop wasting time.")
+        return("Error 003: Invalid input detected/")
 
 #convert(int(input("What is the number?\n")),
 #          int(input("What is the current base? (1 < x < 11)\n")),
