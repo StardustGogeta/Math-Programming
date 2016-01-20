@@ -15,6 +15,6 @@ def coterminal(orig):
     else:
         ang1 -= 360
         ang2 += 360
-    print("\nThe coterminal angles include ", int(ang1), " and ", int(ang2), ".\n")
+    return("The coterminal angles include "+str(ang1)+" and "+str(ang2)+".")
 
-coterminal(int(input("Please state an angle.\n")))
+#coterminal(int(input("Please state an angle.\n")))
