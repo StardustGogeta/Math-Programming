@@ -1,7 +1,5 @@
 from tkinter import *
-import FC4
-import BC
-import LIC
+import FC4, BC, LIC, CA
 
 class FCMenu:
     def __init__(self,master):
@@ -179,6 +177,25 @@ class LICMenu:
         self.result.delete(0,END)
         self.result.insert(END,final)
 
+class CAMenu:
+    def __init__(self,master):
+        frame = Frame(master)
+        self.question = Label(frame, text="Please state an angle.")
+        self.entry = Entry(frame, justify=CENTER)
+        self.entry.bind("<Return>",self.calc)
+        self.button = Button(frame, text="Calculate", command=self.calc)
+        self.result = Listbox(frame,height=1,width=35)
+        
+        frame.pack(fill=BOTH,expand=True)
+        self.question.pack(fill=X,expand=False)
+        self.entry.pack(fill=X,expand=False)
+        self.button.pack(fill=BOTH,expand=False)
+        self.result.pack(side=LEFT,fill=BOTH,expand=True)
+        
+    def calc(self, e=1):
+        e = int(self.entry.get())
+        self.result.delete(0,END)
+        self.result.insert(END,CA.coterminal(e))
 
 class Menu:
     def __init__(self,master):
@@ -187,13 +204,15 @@ class Menu:
         self.FC = Button(frame, text="Factor Calculator", command=self.FC)
         self.BC = Button(frame, text="Base Converter", command=self.BC)
         self.LIC = Button(frame, text="Line Intercept Calculator", command=self.LIC)
+        self.CA = Button(frame, text="Coterminal Angle Calculator", command=self.CA)
 
         frame.pack(fill=BOTH,expand=True)
         self.title.pack(fill=BOTH,expand=False)
         self.FC.pack(fill=BOTH,expand=True)
         self.BC.pack(fill=BOTH,expand=True)
         self.LIC.pack(fill=BOTH,expand=True)
-        
+        self.CA.pack(fill=BOTH,expand=True)
+
     def FC(self):
         FCwindow = Tk()
         FCwindow.wm_title("Factor Calculator")
@@ -211,6 +230,12 @@ class Menu:
         LICwindow.wm_title("Line Intercept Calculator")
         menu=LICMenu(LICwindow)
         LICwindow.mainloop()
+        
+    def CA(self):
+        CAwindow = Tk()
+        CAwindow.wm_title("Line Intercept Calculator")
+        menu=CAMenu(CAwindow)
+        CAwindow.mainloop()
 
 root = Tk()
 root.wm_title("Selection Menu")
