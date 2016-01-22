@@ -1,5 +1,5 @@
 from tkinter import *
-import FC4, BC, LIC, CA
+import FC4, BC, LIC, CA, TR
 
 class FCMenu:
     def __init__(self,master):
@@ -92,7 +92,7 @@ class LICMenu:
         self.line4 = Label(self.frame, text="Line 2 - Y-intercept")
         self.entry4 = Entry(self.frame, justify=CENTER)
         self.entry4.bind("<Return>",self.calc1)
-        self.button = Button(self.frame, text="Calculate", command=self.calc)
+        self.button = Button(self.frame, text="Calculate", command=self.calc1)
         self.result = Listbox(self.frame, height=1)
 
         self.line1.pack(fill=BOTH,expand=True)
@@ -184,7 +184,7 @@ class CAMenu:
         self.entry = Entry(frame, justify=CENTER)
         self.entry.bind("<Return>",self.calc)
         self.button = Button(frame, text="Calculate", command=self.calc)
-        self.result = Listbox(frame,height=1,width=35)
+        self.result = Listbox(frame,height=1,width=40)
         
         frame.pack(fill=BOTH,expand=True)
         self.question.pack(fill=X,expand=False)
@@ -197,6 +197,67 @@ class CAMenu:
         self.result.delete(0,END)
         self.result.insert(END,CA.coterminal(e))
 
+class TRMenu:
+    def __init__(self,master):
+        self.frame = Frame(master)
+        frame1 = Frame(self.frame)
+        self.t,t=0,0
+        self.deg = Radiobutton(frame1, text="Degrees", indicatoron=0, variable=t, value=1, command=self.deg)
+        self.rad = Radiobutton(frame1, text="Radians", indicatoron=0, variable=t, value=2, command=self.rad)
+        self.question = Label(self.frame, text="Please state an angle.")
+        self.entry = Entry(self.frame, justify=CENTER)
+        self.entry.bind("<Return>",self.calc)
+        self.button = Button(self.frame, text="Calculate", command=self.calc)
+        self.result = Listbox(self.frame,height=6,width=15)
+        
+        self.frame.pack(side=TOP,fill=BOTH,expand=True)
+        frame1.pack(side=TOP,fill=BOTH,expand=True)
+        self.deg.pack(side=LEFT,fill=BOTH,expand=True)
+        self.rad.pack(side=RIGHT,fill=BOTH,expand=True)
+        self.question.pack(fill=X,expand=False)
+        self.entry.pack(fill=X,expand=False)
+        self.button.pack(fill=BOTH,expand=False)
+        self.result.pack(fill=BOTH,expand=True)
+
+    def deg(self):
+        self.rad.config(state=ACTIVE)
+        if self.t==2:
+            self.question1.destroy()
+            self.frame2.destroy()
+            self.yes.destroy()
+            self.no.destroy()
+        self.t = 1
+
+    def rad(self):
+        self.t = 2
+        self.rad.config(state=DISABLED)
+        self.question1 = Label(self.frame, text="Is it in terms of pi?")
+        self.frame2 = Frame(self.frame)
+        y=0
+        self.yes = Radiobutton(self.frame2, variable=y, command=self.y3, text="Yes", value=3)
+        self.no = Radiobutton(self.frame2, variable=y, command=self.y4, text="No", value=4)
+
+        self.question1.pack(fill=X,expand=False)
+        self.frame2.pack(fill=BOTH,expand=True)
+        self.yes.pack(side=LEFT,fill=BOTH,expand=True)
+        self.no.pack(side=RIGHT,fill=BOTH,expand=True)
+
+    def y3(self):
+        self.y = 3
+
+    def y4(self):
+        self.y = 4
+        
+    def calc(self, t=1, e=1, y=1):
+        t = self.t
+        e = float(self.entry.get())
+        if t==2:
+            y = self.y
+        self.result.delete(0,END)
+        x = TR.trig(t,e,y)
+        for a in x:
+            self.result.insert(END,a)
+
 class Menu:
     def __init__(self,master):
         frame = Frame(master)
@@ -205,6 +266,7 @@ class Menu:
         self.BC = Button(frame, text="Base Converter", command=self.BC)
         self.LIC = Button(frame, text="Line Intercept Calculator", command=self.LIC)
         self.CA = Button(frame, text="Coterminal Angle Calculator", command=self.CA)
+        self.TR = Button(frame, text="Trigonometric Ratio Calculator", command=self.TR)
 
         frame.pack(fill=BOTH,expand=True)
         self.title.pack(fill=BOTH,expand=False)
@@ -212,6 +274,7 @@ class Menu:
         self.BC.pack(fill=BOTH,expand=True)
         self.LIC.pack(fill=BOTH,expand=True)
         self.CA.pack(fill=BOTH,expand=True)
+        self.TR.pack(fill=BOTH,expand=True)
 
     def FC(self):
         FCwindow = Tk()
@@ -233,9 +296,15 @@ class Menu:
         
     def CA(self):
         CAwindow = Tk()
-        CAwindow.wm_title("Line Intercept Calculator")
+        CAwindow.wm_title("Coterminal Angle Calculator")
         menu=CAMenu(CAwindow)
         CAwindow.mainloop()
+
+    def TR(self):
+        TRwindow = Tk()
+        TRwindow.wm_title("Trigonometric Ratio Calculator")
+        menu=TRMenu(TRwindow)
+        TRwindow.mainloop()
 
 root = Tk()
 root.wm_title("Selection Menu")
