@@ -4,12 +4,9 @@ def convert(fN,fB,sB):
     try:
         tVT=int(str(fN),fB)
         sN=""
-        print(tVT)
         while tVT:
             sN+=str(tVT%sB)
-            print(sN)
             tVT//=sB
-            print(tVT)
         return(sN[::-1])
     except ValueError:
         return("Error 003: Invalid input detected/")
