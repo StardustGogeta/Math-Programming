@@ -1,13 +1,13 @@
 from math import *
 
-def trigratios(ang,o):
+def trig(ang,o,rad):
     pi=atan(1)*4
-    if ang==0:
+    print(ang,o,rad)
+    if ang==1:
         o=o*pi/180
     else:
-        rad=int(input("Is it in terms of pi? (Y=1)\n"))
-        if rad==1:
+        if rad==3:
             o=pi*o;
-    print("sin = ",sin(o),"\ncos = ",cos(o),"\ntan = ",tan(o),"\ncsc = ",1/sin(o),"\nsec = ",1/cos(o),"\ncot = ",1/tan(o),"\n")
+    return("sin = "+str(round(sin(o),3)),"cos = "+str(round(cos(o),3)),"tan = "+str(round(tan(o),3)),"csc = "+str(round(1/sin(o),3)),"sec = "+str(round(1/cos(o),3)),"cot = "+str(round(1/tan(o),3)))
 
-trigratios(int(input("Degrees (0) or radians (1)?\n")),float(input("What is the angle measure?\n")))
+#trigratios(int(input("Degrees (0) or radians (1)?\n")),float(input("What is the angle measure?\n")))
