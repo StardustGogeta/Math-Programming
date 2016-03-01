@@ -2,7 +2,6 @@ from math import *
 
 def trig(ang,o,rad):
     pi=atan(1)*4
-    print(ang,o,rad)
     if ang==1:
         o=o*pi/180
     else:
