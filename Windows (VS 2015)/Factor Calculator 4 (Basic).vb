@@ -1,29 +1,19 @@
 ﻿Module Module1
 
     Sub Main()
-        Console.Write("Please input your number.")
+        Console.WriteLine("Please input your number.")
+        Dim i As Long = Console.ReadLine()
         Console.Write(Environment.NewLine)
-        Dim Input As Long = Console.ReadLine()
-        Console.Write(Environment.NewLine)
-
-        If (Input > 0) Then
-            Dim Divisor As Long = 1
-            For Divisor = 1 To Math.Sqrt(Input)
-                If (Input Mod Divisor = 0) Then
-                    Console.Write(Input / Divisor)
-                    Console.Write(Environment.NewLine)
-                    Console.Write(Divisor)
-                    Console.Write(Environment.NewLine)
-                    '<< Input / Divisor << "\n" << Divisor << "\n";
+        If (i > 0) Then
+            For d = 1 To Math.Sqrt(i)
+                If (i Mod d = 0) Then
+                    Console.WriteLine("{0}, {1}", i / d, d)
                 End If
             Next
             Console.Write(Environment.NewLine)
-            Console.Write("The list of factors has been successfully generated.")
-            Console.Write(Environment.NewLine)
+            Console.WriteLine("The list of factors has been successfully generated.")
         Else
-            Console.Write("Are you trying to kill me?")
-            Console.Write(Environment.NewLine)
-            Console.Write("You will pay for that.")
+            Console.WriteLine("What are you doing?")
         End If
     End Sub
 
