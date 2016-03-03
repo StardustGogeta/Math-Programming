@@ -258,55 +258,22 @@ class TRMenu:
         for a in x:
             self.result.insert(END,a)
 
-class Menu:
+class rootMenu:
     def __init__(self,master):
-        frame = Frame(master)
-        self.title = Label(frame, text="StardustGogeta's\nMath Tools")
-        self.FC = Button(frame, text="Factor Calculator", command=self.FC)
-        self.BC = Button(frame, text="Base Converter", command=self.BC)
-        self.LIC = Button(frame, text="Line Intercept Calculator", command=self.LIC)
-        self.CA = Button(frame, text="Coterminal Angle Calculator", command=self.CA)
-        self.TR = Button(frame, text="Trigonometric Ratio Calculator", command=self.TR)
+        self.frame = Frame(master)
+        self.title = Label(self.frame, text="StardustGogeta's\nMath Tools")
+        self.FC = Button(self.frame, text="Factor Calculator", command=lambda:window('Factor Calculator', 'FC'))
+        self.BC = Button(self.frame, text="Base Converter", command=lambda:window('Base Converter', 'BC'))
+        self.LIC = Button(self.frame, text="Line Intercept Calculator", command=lambda:window('Line Intercept Calculator', 'LIC'))
+        self.CA = Button(self.frame, text="Coterminal Angle Calculator", command=lambda:window('Coterminal Calculator', 'CA'))
+        self.TR = Button(self.frame, text="Trigonometric Ratio Calculator", command=lambda:window('Trigonometric Ratio Calculator', 'TR'))
 
-        frame.pack(fill=BOTH,expand=True)
         self.title.pack(fill=BOTH,expand=False)
-        self.FC.pack(fill=BOTH,expand=True)
-        self.BC.pack(fill=BOTH,expand=True)
-        self.LIC.pack(fill=BOTH,expand=True)
-        self.CA.pack(fill=BOTH,expand=True)
-        self.TR.pack(fill=BOTH,expand=True)
+        x = ["frame","FC","BC","LIC","CA","TR"]
+        for y in x:
+            exec("self."+str(y)+".pack(fill=BOTH,expand=True)")
 
-    def FC(self):
-        FCwindow = Tk()
-        FCwindow.wm_title("Factor Calculator")
-        menu=FCMenu(FCwindow)
-        FCwindow.mainloop()
+def window(x,y,self=0):
+    exec("{1}=Tk()\n{1}.wm_title('{0}')\nmenu={1}Menu({1})\n{1}.mainloop()".format(str(x),str(y)))
 
-    def BC(self):
-        BCwindow = Tk()
-        BCwindow.wm_title("Base Converter")
-        menu=BCMenu(BCwindow)
-        BCwindow.mainloop()
-
-    def LIC(self):
-        LICwindow = Tk()
-        LICwindow.wm_title("Line Intercept Calculator")
-        menu=LICMenu(LICwindow)
-        LICwindow.mainloop()
-        
-    def CA(self):
-        CAwindow = Tk()
-        CAwindow.wm_title("Coterminal Angle Calculator")
-        menu=CAMenu(CAwindow)
-        CAwindow.mainloop()
-
-    def TR(self):
-        TRwindow = Tk()
-        TRwindow.wm_title("Trigonometric Ratio Calculator")
-        menu=TRMenu(TRwindow)
-        TRwindow.mainloop()
-
-root = Tk()
-root.wm_title("Selection Menu")
-menu=Menu(root)
-root.mainloop()
+window('Selection Menu', 'root')
