@@ -3,10 +3,10 @@ import math
 def convert(n):
     if n > 0:
         numbers=[]
-        for d in range(1, int(math.sqrt(n))+1):
+        for d in range(1, math.floor(math.sqrt(n)+1)):
             if (n % d == 0):
-                numbers.append(int(n/d))
-                numbers.append(d)
+                numbers.extend([int(n/d),d])
+        numbers.sort()
         return(numbers)
     else:
         return("Error!")
