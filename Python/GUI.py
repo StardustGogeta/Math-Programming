@@ -1,7 +1,7 @@
 from tkinter import *
-import FC4, BC, LIC, CA, TR
+import FC4, FC5, BC, LIC, CA, TR, decimal
 
-class FCMenu:
+class FC4Menu:
     def __init__(self,master):
         frame = Frame(master)
         self.question = Label(frame, text="What is the number?")
@@ -25,7 +25,32 @@ class FCMenu:
         self.result.delete(0,END)
         for x in numbers:
             self.result.insert(END,x)
-
+            
+class FC5Menu:
+    def __init__(self,master):
+        frame = Frame(master)
+        self.question = Label(frame, text="What is the number?")
+        self.entry = Entry(frame, justify=CENTER)
+        self.entry.bind("<Return>",self.calc)
+        self.button = Button(frame, text="Factorize", command=self.calc)
+        self.scroll = Scrollbar(frame)
+        self.result = Listbox(frame,height=12,width=30,selectmode=EXTENDED,yscrollcommand=self.scroll.set)
+        self.scroll.config(command=self.result.yview)
+        
+        frame.pack(fill=BOTH,expand=True)
+        self.question.pack(fill=X,expand=False)
+        self.entry.pack(fill=X,expand=False)
+        self.button.pack(fill=BOTH,expand=False)
+        self.scroll.pack(side=RIGHT,fill=Y,expand=False)
+        self.result.pack(side=LEFT,fill=BOTH,expand=True)
+        
+    def calc(self, e=1):
+        decimal.getcontext().prec = 500
+        e = decimal.Decimal(self.entry.get())
+        numbers = FC5.convert(e)
+        self.result.delete(0,END)
+        for x in numbers:
+            self.result.insert(END,x)
 
 class BCMenu:
     def __init__(self,master):
@@ -262,14 +287,15 @@ class rootMenu:
     def __init__(self,master):
         self.frame = Frame(master)
         self.title = Label(self.frame, text="StardustGogeta's\nMath Tools")
-        self.FC = Button(self.frame, text="Factor Calculator", command=lambda:window('Factor Calculator', 'FC'))
+        self.FC4 = Button(self.frame, text="Factor Calculator 4", command=lambda:window('Factor Calculator 4', 'FC4'))
+        self.FC5 = Button(self.frame, text="Factor Calculator 5", command=lambda:window('Factor Calculator 5', 'FC5'))
         self.BC = Button(self.frame, text="Base Converter", command=lambda:window('Base Converter', 'BC'))
         self.LIC = Button(self.frame, text="Line Intercept Calculator", command=lambda:window('Line Intercept Calculator', 'LIC'))
         self.CA = Button(self.frame, text="Coterminal Angle Calculator", command=lambda:window('Coterminal Calculator', 'CA'))
         self.TR = Button(self.frame, text="Trigonometric Ratio Calculator", command=lambda:window('Trigonometric Ratio Calculator', 'TR'))
 
         self.title.pack(fill=BOTH,expand=False)
-        x = ["frame","FC","BC","LIC","CA","TR"]
+        x = ["frame","FC4","FC5","BC","LIC","CA","TR"]
         for y in x:
             exec("self."+str(y)+".pack(fill=BOTH,expand=True)")
 
