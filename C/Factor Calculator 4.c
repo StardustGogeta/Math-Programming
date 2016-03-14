@@ -10,16 +10,10 @@ void main()
 	{
 	    long long d;
 		for (d=1; d<=sqrt(n); d++)
-		{
 			if (n % d == 0)
-			{
 				printf("%lld, %lld\n",n/d,d);
-			}
-		}
 		puts("\nThe list of factors has been successfully generated.");
 	}
 	else
-	{
 		puts("\nSorry, I can't do that.");
-	}
 }
