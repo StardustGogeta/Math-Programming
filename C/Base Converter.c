@@ -6,7 +6,7 @@
 void main()
 {
 	char *fN = (char*) malloc(500);
-    int fB; int sB;
+	int fB; int sB;
 	puts("What is the number?");
 	scanf("%s",fN);
 	puts("What is the current base? (<=36)");
@@ -17,13 +17,13 @@ void main()
 	{
 		long tVT = strtol(fN,NULL,fB);
 		char *sN = (char*) malloc(500);
-		char *test = (char*) malloc(500);
+		char *t = (char*) malloc(500);
 		while (tVT)
 		{
-            sprintf(test,"%d",tVT%sB);
-            strcat(test,sN);
-            strcpy(sN,test);
-            tVT/=sB;
+            		sprintf(t,"%d",tVT%sB);
+            		strcat(t,sN);
+            		strcpy(sN,t);
+            		tVT/=sB;
 		}
 		printf("\nYour number is %s.\n",sN);
 	}
