@@ -7,9 +7,10 @@ class rootMenu:
         self.frame = Frame(master)
         self.load = Button(self.frame, text='Load File', command=self.loadFile)
         self.save = Button(self.frame, text='Save File', command=self.saveFile)
-        self.submit = Button(self.frame, text='Compile Python\nto KerbalSpace', command=self.compiler)
-        self.run = Button(self.frame, text='Run Output', command=self.run)
-        for y in ["frame","load","save","submit","run"]:
+        self.submit = Button(self.frame, text='Compile KerbalSpace\nto Python', command=self.compiler)
+        self.exe = Button(self.frame, text='Run in IDLE', command=self.exe)
+        self.run = Button(self.frame, text='Run in CMD', command=self.run)
+        for y in ["frame","load","save","submit","exe","run"]:
             exec("self."+str(y)+".pack(fill=BOTH,expand=True)")
             
     def loadFile(self):
@@ -20,6 +21,12 @@ class rootMenu:
                                                            ("All files", "*.*")))
     def compiler(self):
         c.compiler(self.lFile,self.sFile)
+
+    def exe(self):
+        bat = open(self.sFile)
+        a = bat.read()
+        exec(a)
+        bat.close()
 
     def run(self):
         bat = open('RUNTIME.bat','w')
