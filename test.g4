@@ -1,3 +1,5 @@
+vim: syntax=java
+
 This is testing.
 This is testing.
 This is testing.

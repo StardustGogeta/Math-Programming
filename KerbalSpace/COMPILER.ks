@@ -1,3 +1,5 @@
+vim: syntax=python
+
 <python>
 	import re
 
