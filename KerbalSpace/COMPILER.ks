@@ -1,4 +1,4 @@
-vim: syntax=kerbalspace
+vim: syntax=python
 
 <python>
 	import re
