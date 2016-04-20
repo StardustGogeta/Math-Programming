@@ -1,10 +1,14 @@
-print("Hello world!")
-print('These are known as meme arrows, used to print text.')
 print('Please input something.')
 a = input()
-b     = input( 'Now input something else.\n')
+b = input( 'Now input something else.\n')
 print('You just said, '+a+" and " + b)
-# Unrecognized syntax: 
+if 1:
+	print('Hi!')
+	print('Bypassing works!')
+if  True :
+    print('hola')
+else:
+    print('buenos dias')
 
 print("Hello world!\nThis is embedded Python.")
 a = input("Please input something.\n")
