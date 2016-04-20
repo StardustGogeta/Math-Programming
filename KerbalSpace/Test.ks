@@ -1,9 +1,14 @@
->"Hello world!"
->'These are known as meme arrows, used to print text.'
+
 >'Please input something.'
 < a
-< b    , 'Now input something else.\n'
+< b, 'Now input something else.\n'
 > 'You just said, '+a+" and " + b
+--if 1:
+	--print('Hi!')
+	>'Bypassing works!'
+
+? True : >'hola': >'buenos dias'
+
 
 <python>
 	print("Hello world!\nThis is embedded Python.")
