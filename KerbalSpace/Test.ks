@@ -1,5 +1,5 @@
 
->'Please input something.'
+> 'Please input something.'
 < a
 < b, 'Now input something else.\n'
 > 'You just said '+a+" and " + b
@@ -7,12 +7,12 @@
 	--print('Hi!')
 	>'Bypassing works!'
 
-? True : >'This is true.': >'This is false.'
-? True: >'Single-line if-statements without "else" work too!'
+? True : > 'This is true.' : > 'This is false.'
+? True : > 'Single-line if-statements without "else" work too!'
 
 ? 1==1
-	>'This is the beauty of KerbalSpace!'
->'The conditional stops because there is no indent here.'
+	> 'This is the beauty of KerbalSpace!'
+> 'The conditional stops because there is no indent here.'
 
 <python>
 	print("Hello world!\nThis is embedded Python.")
