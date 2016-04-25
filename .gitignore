@@ -198,6 +198,7 @@ FakesAssemblies/
 Python/Unfinished/Reddit Bot/botconfig.py
 *.mid
 GNU Assembly/ASSEMBLER.py
-GNU Assembly/test.bat
+GNU Assembly/*/*.bat
+GNU Assembly/*.bat
 *.exe
 *.o
