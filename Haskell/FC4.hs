@@ -1,4 +1,3 @@
-fc4 :: Integer -> [IO ()]
-check :: Integer -> Double -> IO ()
-fc4 input = map (check input) [1 .. sqrt (fromIntegral input)]
-check input divisor = if (fromIntegral input/divisor==0) then print divisor (fromIntegral input/divisor) else print ()
+import Control.Monad
+fc4 a = check a (floor (sqrt (fromIntegral a)))
+check a b = when (rem a b == 0) (print (div a b, b)) >> if b > 1 then check a (b-1) else putStrLn ("Done.")
