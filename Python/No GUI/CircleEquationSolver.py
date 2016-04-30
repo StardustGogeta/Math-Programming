@@ -14,4 +14,4 @@ mat2 = matrix([[a,b,1],
                [e,f,1]]).I
 DEF = mat2 * mat1
 D,E,F = DEF[0].A1[0]/2,DEF[1].A1[0]/2,DEF[2].A1[0]
-print("(x + {0})² + (y + {1})² = {2}".format(round(D,3),round(E,3),round(-F+D**2+E**2,3)))
+print("(x - {0})² + (y - {1})² = {2}".format(round(-D,3),round(-E,3),round(-F+D**2+E**2,3)))
