@@ -1,17 +1,13 @@
-import string, math
-
 def fit(attempt):
     fitness = 0
     try:
         for e in x:
-            e = int(e)
-            if int(y[x.index(str(e))]) == eval(attempt):
+            if y[x.index(e)] == eval(attempt):
                 fitness += 1
         #print(attempt+" is legal")
         return fitness
     except:
         return 0
-
 
 x = input("What is the input number set, separated with spaces?\n").split(' ')
 y = input("What is the output number set, separated with spaces?\n").split(' ')
@@ -21,13 +17,15 @@ z = input("Extra options? (See source for full list.)\n").split(' ')
 # 2. Charset used (0: basic, 1: advanced)
 # 3. Maximum complexity (default is 6)
 z[0] = 1 if z[0]=='' else z[0]
-charsets = ["e0123456789%+-*/z","""e\\0123456789%+-_=/*^,;!()'{}[]:\"z"""]
+charsets = ["e-0123456789%+*/().z","""e\\0123456789%+-_=/*^,.;!()'{}[]:\"z"""]
 chars = charsets[int(z[1])] if len(z)>1 else charsets[0]
 max = int(z[2]) if len(z)>2 else 6
 fitness, bestFit, indices, attempt = 0,0,[0],''
+x, y = [int(e) for e in x], [int(e) for e in y]
 for _ in range(1,int(z[0])):
     indices.extend([0])
 while fitness < len(x):
+    attempt = ''
     for a in indices:
         attempt += chars[a]
     fitness = fit(attempt)
@@ -42,9 +40,8 @@ while fitness < len(x):
             break
     if addLen:
         if max>1:
+            indices = [0 for _ in indices]
             indices.extend([0])
-            for a in range(len(indices)):
-                indices[a] = 0
             max -= 1
             print("\nExtending the attempt to {0} characters.\n".format(len(indices)))
         else:
@@ -55,5 +52,4 @@ while fitness < len(x):
             if indices[a] == len(chars):
                 indices[a-1] += 1
                 indices[a] = 0
-    attempt = attempt[:-len(indices)]
     
