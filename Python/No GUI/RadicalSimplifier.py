@@ -14,10 +14,7 @@ else:
     i,o,fV,fC = [1]*4
     while r > 1:
         n = f(r)
-        if fV == n:
-            fC += 1
-        else:
-            fC,fV,(o,i) = 1,n,e(o,i,fV,fC,x)
+        if fV == n: fC += 1
+        else: fC,fV,(o,i) = 1,n,e(o,i,fV,fC,x)
         r /= n
-    sup = [['⁰','¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹'][int(y)] for y in str(x)]
-    print("Your value is {0} {2}√{1}.".format(*e(o,i,fV,fC,x),''.join(sup)))
+    print("Your value is {0} {2}√{1}.".format(*e(o,i,fV,fC,x),''.join([['⁰','¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹'][int(y)] for y in str(x)])))
