@@ -1,30 +1,23 @@
-import math
-
-def findFactor(n):
-    for d in range(2, math.floor(math.sqrt(n))+1):
-        if (n % d == 0):
-            return(d)
-    return(int(n))
-
-rad = int(input("What is the number inside the radical?\n"))
-exp = int(input("What is the number outside the radical?\n"))
-a = round(rad**(1/exp),12)
-if a % 1 == 0:
-    print("Your value is {0}.".format(a))
+from math import sqrt, floor
+def f(n):
+    for d in range(2, floor(sqrt(n))+1):
+        if not n%d: return d
+    return int(n)
+def e(a,b,c,d,e):
+    return (a*c**(d//e),b*c**(d%e))
+r = int(input("What is the number inside the radical?\n"))
+x = int(input("What is the root?\n"))
+a = round(r**(1/x),12)
+if not a%1:
+    print("Your value is {0}.".format(int(a)))
 else:
-    factors = []
-    o = rad
-    out = 1
-    while rad > 1:
-        n = findFactor(rad)
-        factors.extend([n])
-        rad /= n
-    for x in factors:
-        if factors.count(x) >= exp:
-            for _ in range(exp):
-                A = factors.index(x)
-                factors.pop(A)
-            out *= x
-    print("{0} \u221a {1}".format(out,int(o/out**exp)))
-        
-    
+    i,o,fV,fC = [1]*4
+    while r > 1:
+        n = f(r)
+        if fV == n:
+            fC += 1
+        else:
+            fC,fV,(o,i) = 1,n,e(o,i,fV,fC,x)
+        r /= n
+    sup = [['⁰','¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹'][int(y)] for y in str(x)]
+    print("Your value is {0} {2}√{1}.".format(*e(o,i,fV,fC,x),''.join(sup)))
