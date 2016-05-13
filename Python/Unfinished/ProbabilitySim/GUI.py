@@ -1,6 +1,7 @@
 from tkinter import *
 import subprocess
 
+# C:/Users/+++++/Documents/GitHub/Math-Programming/Python/ProbabilitySim/CF.exe
 # 1 2 15000
 def cpp_open(fp,args):
     startupinfo = subprocess.STARTUPINFO()
@@ -27,6 +28,7 @@ class CFMenu:
     def calc(self, a=1, b=1, c=1):
         a,b,c=1,2,10000
         self.result.delete(0,END)
+        self.result.insert(END,cpp_open('C:/Users/+++++/Documents/GitHub/Math-Programming/Python/ProbabilitySim/CF.exe ','{0} {1} {2}'.format(a,b,c)))
             
 
 class rootMenu:
