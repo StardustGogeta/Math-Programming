@@ -3,7 +3,7 @@ import pygame as pg, random, os
 # Change these to alter map size
 gridDims = (30,30)
 boxWidth = 20
-clock_speed = 20
+clock_speed = 15
 
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
@@ -73,6 +73,15 @@ while running:
         if event.type == pg.QUIT:
             running = False
         elif event.type == pg.KEYDOWN:
+            if event.key == pg.K_SPACE: # Restart the game
+                game = True
+                grid = [[0 for x in range(gridDims[1])] for y in range(gridDims[0])]
+                screen.fill(black)
+                snakeInitY = random.randrange(1,gridDims[0])
+                snakeInitX = random.randrange(0,gridDims[1])
+                snake = [[snakeInitY,snakeInitX],[snakeInitY-1,snakeInitX]]
+                direction = 0
+                spawnFood(snake)
             keys = pg.key.get_pressed()[273:277] # Grab pressed arrow keys (U/D/R/L)
             if keys.count(1):
                 key = pg.key.get_pressed()[273:277].index(1)
