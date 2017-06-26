@@ -1,6 +1,8 @@
--- (-2) 7 (-9) 0 (-10) (-5)
 import Linear
+-- Requires the "linear" package
 import Control.Lens
+
+-- (-2) 7 (-9) 0 (-10) (-5)
 roundTo x n = (fromIntegral (floor (x*10^n)))/10^n
 ces :: V3 Double -> V3 Double -> V3 Double -> V3 Double -> V3 Double -> V3 Double -> IO ()
 calc :: M33 Double -> IO ()
