@@ -43,7 +43,7 @@ def playBlackjack():
 		elif score == 21:
 			print('{} got a blackjack!'.format(player.name,score))
 		else:
-			if score > finalDealer:
+			if score > finalDealer or finalDealer > 21:
 				status = 'won'
 			elif score == finalDealer:
 				status = 'tied'
@@ -105,5 +105,3 @@ class Manual(Player):
 
 		
 while 1: playBlackjack()
-		
-		
