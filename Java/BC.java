@@ -1,4 +1,3 @@
-package bc;
 import java.util.Scanner;
 class BC {
     public static void main(String[] args) {
