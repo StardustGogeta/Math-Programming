@@ -1,4 +1,3 @@
-package fc4;
 import java.util.Scanner;
 class FC4 {
     public static void main(String[] args) {
