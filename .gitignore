@@ -16,3 +16,4 @@ GNU Assembly/*.bat
 *.lps
 *.lpr
 *.class
+*.aux
