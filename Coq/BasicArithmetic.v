@@ -1,6 +1,7 @@
 Require Import Bool.
 Require Import Setoid.
-Require Import Omega. (* This makes arithmetic relatively easy to handle*)
+Require Import Omega.
+(* This makes arithmetic relatively easy to handle *)
 
 Lemma zeroX_is_zero: (forall x, 0 * x = 0).
 Proof.
@@ -14,7 +15,6 @@ Proof.
   (* Alternatively...
   elim x.
     trivial.
-    simpl.
     trivial. *)
 Qed.
 
