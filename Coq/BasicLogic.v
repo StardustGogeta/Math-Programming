@@ -2,6 +2,8 @@ Require Import Bool.
 Require Import Setoid.
 Require Import Classical_Prop.
 
+Module WikiLogic.
+
 (* Ideas at https://en.wikipedia.org/wiki/Propositional_calculus#Basic_and_derived_argument_forms *)
 (* The tactic `intuition` can replace most of these (that don't require Classical_Prop),
   but it is deliberately not used for practice purposes *)
@@ -271,6 +273,8 @@ Proof.
   apply deMorganFirst. (* Requires Classical_Prop one last time *)
   apply excludedMiddle.
 Qed.
+
+End WikiLogic.
 
 (* Unrelated to the Wikipedia page *)
 Theorem negb_is_not : (forall a, Is_true (negb a) <-> (~(Is_true a))).
