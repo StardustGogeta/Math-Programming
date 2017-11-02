@@ -8,6 +8,7 @@ GNU Assembly/*/*.bat
 GNU Assembly/*.bat
 *.exe
 *.o
+*.vo
 *.ctxt
 *.bak
 *.bluej
