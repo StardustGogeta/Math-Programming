@@ -136,9 +136,61 @@ Proof.
   apply (divide_mul y x y x H (neq_refl 0 x (Nat.lt_neq 0 x H)) H0 H0).
 Qed.
 
+SearchAbout Nat.even.
+SearchAbout Nat.divide.
 (*
+Nat.even_add_mul_2: forall n m : nat, Nat.even (n + 2 * m) = Nat.even n
+Nat.even_0: Nat.even 0 = true
+Nat.even_spec: forall n : nat, Nat.even n = true <-> Nat.Even n
+Nat.even_mul:
+  forall n m : nat, Nat.even (n * m) = Nat.even n || Nat.even m
+orb_diag: forall b : bool, b || b = b
+Nat.divide_factor_r: forall n m : nat, Nat.divide n (m * n)
+*)
+
+Lemma evenSquare_implies_even: forall x, Nat.Even (x*x) -> Nat.Even x.
+Proof.
+  (* Maybe use Nat.even_pow instead? *)
+  intros. apply Nat.even_spec in H.
+  rewrite Nat.even_mul in H.
+  rewrite orb_diag in H.
+  apply Nat.even_spec. exact H.
+Qed.
+
+Axiom even_div_2: forall x, Nat.Even x -> Nat.divide 2 x.
+(* I do not know how else to prove this, since it is such a definitive
+  relation. The SearchAbout tactic leads me to believe there is a massive
+  schism between the Nat.divide, Nat.modulo, and Nat.even / Nat.Even
+  parts of Coq, making it incredibly difficult to switch between them. *)
+
+SearchAbout Nat.divide.
+Lemma twoAsFactor_implies_even: forall x, x <> 0 -> (exists y, y * 2 = x) <-> Nat.Even x.
+Proof.
+  unfold iff. intros. refine (conj _ _).
+  intros. destruct H0 as [A B].
+  refine (ex_intro _ A _). (* I came upon this by mistake *)
+  rewrite Nat.mul_comm. symmetry. exact B.
+  intros.
+  remember (x/2) as y.
+  apply div_implies_mul in Heqy.
+  refine (ex_intro _ y _). rewrite Nat.mul_comm. exact Heqy.
+  exact H. apply (even_div_2 x H0).
+Qed.
+
 Theorem sqrt2_is_irrational: forall p q, q <> 0 -> p * p <> q * q * 2.
 Proof.
-  intros.
-  cut (Nat.divide 2 p).
-*)
+  unfold not. intros.
+  remember (p*p) as p_sq.
+  remember (q*q) as q_sq.
+  cut (Nat.Even p_sq). intro.
+  Focus 2. 
+    apply twoAsFactor_implies_even.
+    admit.
+    refine (ex_intro _ q_sq _).
+    symmetry. exact H0.
+  rewrite Heqp_sq in H1.
+  apply evenSquare_implies_even in H1.
+  remember (p/2) as halfP.
+  (* Prove q=0 is the only case in which this works, but q!=0 *)
+
+
