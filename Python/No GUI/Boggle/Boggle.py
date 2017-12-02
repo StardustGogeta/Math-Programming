@@ -1,3 +1,5 @@
+from time import clock
+start = clock()
 txt = open("english_words.txt")
 english = list(filter(lambda x: len(x) < 18, txt.read().upper().splitlines()))
 txt.close()
@@ -32,7 +34,7 @@ def formWords(coords, board, path, tempWord = '', prevSubset = english):
     y, x = coords
     tempWord += board[y][x]
     path.append(coords)
-    if len(tempWord) > 2 and tempWord in english:
+    if len(tempWord) > 2 and tempWord in prevSubset:
         formed += [tempWord]
     wordsSubset = findWordsStartingWith(tempWord, prevSubset)
     if len(wordsSubset):
@@ -43,11 +45,12 @@ def formWords(coords, board, path, tempWord = '', prevSubset = english):
 masterList = []
 for y in range(4):
     for x in range(4):
-        print("Cell complete")
         masterList += formWords((y, x), board, list()) # Removing list() causes path to break because of list wackiness
+        print("Cell complete")
 
 masterList = sorted(list(set(masterList)))
 print(' '.join(masterList))
 out = open('out.txt', 'w')
 out.write(' '.join(masterList))
 out.close()
+print(clock()-start)
