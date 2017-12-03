@@ -5,6 +5,10 @@ Require Import Classical_Prop. (* Excluded middle *)
 Require Import Omega.
 (* Omega makes arithmetic relatively easy to handle *)
 
+(* If I ever need fancy notation:
+Notation "A | B" := (Nat.divide A B) (at level 0).
+*)
+
 Lemma zeroX_is_zero: (forall x, 0 * x = 0).
 Proof.
   trivial.
@@ -157,11 +161,20 @@ Proof.
   apply Nat.even_spec. exact H.
 Qed.
 
-Axiom even_div_2: forall x, Nat.Even x -> Nat.divide 2 x.
-(* I do not know how else to prove this, since it is such a definitive
-  relation. The SearchAbout tactic leads me to believe there is a massive
-  schism between the Nat.divide, Nat.modulo, and Nat.even / Nat.Even
-  parts of Coq, making it incredibly difficult to switch between them. *)
+(* There is a massive schism between the Nat.divide, Nat.modulo, and Nat.even / Nat.Even
+  parts of Coq, making it incredibly difficult to switch between them. It was a miracle
+  that I could finally achieve this without setting a new axiom. *)
+Theorem even_div_2: forall x, Nat.Even x <-> Nat.divide 2 x.
+Proof.
+  intros. unfold iff. refine (conj _ _). intros.
+  destruct H. rewrite H. apply Nat.divide_factor_l.
+  intros. destruct H. rewrite <- Nat.even_spec.
+  rewrite H. rewrite <- Nat.even_0.
+  cut (x0 * 2 = 0 + x0 * 2). intro. rewrite H0.
+  rewrite Nat.mul_comm.
+  SearchAbout Nat.even.
+  rewrite Nat.even_add_mul_2. trivial. omega.
+Qed.
 
 SearchAbout Nat.divide.
 Lemma twoAsFactor_implies_even: forall x, x <> 0 -> (exists y, y * 2 = x) <-> Nat.Even x.
@@ -174,23 +187,68 @@ Proof.
   remember (x/2) as y.
   apply div_implies_mul in Heqy.
   refine (ex_intro _ y _). rewrite Nat.mul_comm. exact Heqy.
-  exact H. apply (even_div_2 x H0).
+  exact H. apply even_div_2. exact H0.
 Qed.
 
-Theorem sqrt2_is_irrational: forall p q, q <> 0 -> p * p <> q * q * 2.
+Definition coprime x y := forall a, a <> 1 -> Nat.divide a x -> ~ Nat.divide a y.
+
+Theorem evens_not_coprime: forall x y, Nat.Even x /\ Nat.Even y -> ~coprime x y.
 Proof.
-  unfold not. intros.
+  unfold not, coprime. intros.
+  rewrite even_div_2 in H. rewrite even_div_2 in H.
+  destruct H.
+  cut (~Nat.divide 2 y). intro.
+  contradiction. (* This is where the magic happens *)
+  apply H0. omega. exact H.
+Qed.
+
+(*
+  There is a major flaw with the following proof, so far:
+  this is only shown to hold for rationals with coprime numerators and denominators.
+*)
+Theorem weak_sqrt2_is_irrational: forall p q, coprime p q -> q <> 0 -> p * p <> q * q * 2.
+Proof.
+  unfold not. intros p q COPRIME q_neq_0 main.
   remember (p*p) as p_sq.
   remember (q*q) as q_sq.
-  cut (Nat.Even p_sq). intro.
+  cut (Nat.Even p_sq). intro p_sq_even.
   Focus 2. 
     apply twoAsFactor_implies_even.
-    admit.
+    unfold not. intro. apply q_neq_0.
+    cut (q_sq = 0). intro. rewrite Heqq_sq in H0.
+    apply Nat.eq_square_0. exact H0.
+    rewrite H in main. symmetry. cut (0 * 2 = q_sq * 2).
+    apply Nat.mul_cancel_r. omega. exact main.
     refine (ex_intro _ q_sq _).
-    symmetry. exact H0.
-  rewrite Heqp_sq in H1.
-  apply evenSquare_implies_even in H1.
-  remember (p/2) as halfP.
-  (* Prove q=0 is the only case in which this works, but q!=0 *)
-
-
+    symmetry. exact main.
+  rewrite Heqp_sq in p_sq_even.
+  apply evenSquare_implies_even in p_sq_even.
+  remember (p/2) as k.
+  apply even_div_2 in p_sq_even.
+  rename p_sq_even into p_even.
+  cut (p <> 0). intro p_neq_0.
+  Focus 2.
+    intro p0. apply q_neq_0. rewrite p0 in Heqp_sq. rewrite Heqp_sq in main.
+    simpl in main. rewrite Heqq_sq in main. cut (0 * 2 = q * q * 2). intro.
+    apply Nat.mul_cancel_r in H. symmetry in H. rewrite Nat.eq_square_0 in H. exact H.
+    omega. rewrite <- main. omega.
+  cut (2 * k = p). intro k_mul.
+  Focus 2.
+    exact (div_implies_mul k p 2 p_neq_0 p_even Heqk).
+  rewrite Nat.mul_comm in k_mul.
+  rewrite Heqp_sq in main. rewrite Heqq_sq in main. rewrite <- k_mul in main.
+  SearchAbout Nat.mul.
+  rewrite Nat.mul_assoc in main. apply Nat.mul_cancel_r in main.
+  rewrite Nat.mul_shuffle0 in main.
+  rewrite <- Heqq_sq in main. cut (Nat.Even q). intro q_even.
+  Focus 2.
+    apply evenSquare_implies_even. rewrite <- Heqq_sq.
+    apply twoAsFactor_implies_even. intro N. apply q_neq_0.
+    rewrite <- Nat.eq_square_0. rewrite <- Heqq_sq. exact N.
+    refine (ex_intro _ (k*k) _). exact main.
+  apply even_div_2 in p_even.
+  cut (~coprime p q). intro NOT_COPRIME.
+  Focus 2.
+    apply (evens_not_coprime p q (conj p_even q_even)).
+  contradiction. omega.
+Qed.
