@@ -140,8 +140,6 @@ Proof.
   apply (divide_mul y x y x H (neq_refl 0 x (Nat.lt_neq 0 x H)) H0 H0).
 Qed.
 
-SearchAbout Nat.even.
-SearchAbout Nat.divide.
 (*
 Nat.even_add_mul_2: forall n m : nat, Nat.even (n + 2 * m) = Nat.even n
 Nat.even_0: Nat.even 0 = true
@@ -172,11 +170,9 @@ Proof.
   rewrite H. rewrite <- Nat.even_0.
   cut (x0 * 2 = 0 + x0 * 2). intro. rewrite H0.
   rewrite Nat.mul_comm.
-  SearchAbout Nat.even.
   rewrite Nat.even_add_mul_2. trivial. omega.
 Qed.
 
-SearchAbout Nat.divide.
 Lemma twoAsFactor_implies_even: forall x, x <> 0 -> (exists y, y * 2 = x) <-> Nat.Even x.
 Proof.
   unfold iff. intros. refine (conj _ _).
@@ -237,7 +233,6 @@ Proof.
     exact (div_implies_mul k p 2 p_neq_0 p_even Heqk).
   rewrite Nat.mul_comm in k_mul.
   rewrite Heqp_sq in main. rewrite Heqq_sq in main. rewrite <- k_mul in main.
-  SearchAbout Nat.mul.
   rewrite Nat.mul_assoc in main. apply Nat.mul_cancel_r in main.
   rewrite Nat.mul_shuffle0 in main.
   rewrite <- Heqq_sq in main. cut (Nat.Even q). intro q_even.
@@ -252,3 +247,60 @@ Proof.
     apply (evens_not_coprime p q (conj p_even q_even)).
   contradiction. omega.
 Qed.
+
+Axiom coprime_reduction: forall p q : nat, exists a b, coprime a b /\ p * b = a * q.
+
+(*Lemma coprime_0: forall n, ~coprime n 0.
+Proof.
+  unfold coprime, not. intros. specialize H with n. destruct H. admit. admit. admit. Admitted.
+  (*discriminate. SearchAbout Nat.divide. apply Nat.divide_0_l.*)*)
+
+Theorem strong_sqrt2_is_irrational: forall p q, q <> 0 -> p * p <> q * q * 2.
+Proof.
+  intros.
+  cut (coprime p q \/ ~coprime p q). intro.
+  Focus 2. apply classic.
+  destruct H0.
+  apply weak_sqrt2_is_irrational. exact H0. exact H.
+
+  (* If p and q are not coprime, this implies that there exists
+  an a and b such that a*a = b*b*2, which is false *)
+  cut (exists a b, coprime a b /\ p * b = a * q). intro. destruct H1. destruct H1. destruct H1.
+  cut (x0 <> 0). intro x0_neq_0. Focus 2. admit.
+  intro. cut (p * p * x0 * x0 = x * x * q * q). intro.
+  rewrite H3 in H4.
+  cut (q * q * 2 * x0 * x0 = x0 * x0 * 2 * q * q). intro.
+  rewrite H5 in H4. rewrite Nat.mul_cancel_r in H4. rewrite Nat.mul_cancel_r in H4.
+  symmetry in H4. cut (x * x <> x0 * x0 * 2).
+  contradiction.
+  apply weak_sqrt2_is_irrational. exact H1. exact x0_neq_0. (* This should be possible without yellow, and early *)
+  exact H. exact H.
+  rewrite Nat.mul_comm. cut (x0 * x0 * 2 * q * q = x0 * (x0 * 2 * q * q)). intro. rewrite H5. rewrite Nat.mul_cancel_l.
+  rewrite Nat.mul_comm. cut (x0 * 2 * q * q = x0 * (2 * q * q)). intro. rewrite H6. rewrite Nat.mul_cancel_l.
+  rewrite Nat.mul_shuffle0. rewrite Nat.mul_cancel_r. rewrite Nat.mul_comm. trivial.
+  exact H. exact x0_neq_0.
+  rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. reflexivity. exact x0_neq_0. (* Maybe avoid canceling x0s... *)
+  rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. reflexivity.
+  rewrite Nat.mul_comm. rewrite Nat.mul_assoc. rewrite Nat.mul_shuffle0. rewrite Nat.mul_shuffle3.
+  rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. rewrite H2. rewrite Nat.mul_comm. rewrite Nat.mul_shuffle3. rewrite H2.
+  rewrite Nat.mul_assoc. rewrite Nat.mul_cancel_r. rewrite Nat.mul_shuffle0. reflexivity. exact H.
+  apply coprime_reduction.
+Qed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
