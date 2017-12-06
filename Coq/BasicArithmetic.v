@@ -9,6 +9,11 @@ Require Import Omega.
 Notation "A | B" := (Nat.divide A B) (at level 0).
 *)
 
+Lemma contrapositive: forall P Q : Prop, (P -> Q) -> (~Q -> ~P).
+Proof.
+  unfold not. intros. apply (H0 (H H1)).
+Qed.
+
 Lemma zeroX_is_zero: (forall x, 0 * x = 0).
 Proof.
   trivial.
@@ -16,18 +21,12 @@ Qed.
 
 Lemma Xzero_is_zero: (forall x, x * 0 = 0).
 Proof.
-  intros.
-  omega.
-  (* Alternatively...
-  elim x.
-    trivial.
-    trivial. *)
+  intros. omega.
 Qed.
 
 Lemma subtractOne: (forall a b, S(a) = S(b) <-> a = b).
 Proof.
-  intros.
-  unfold iff.
+  intros. unfold iff.
   refine (conj _ _). intro f. injection f. trivial.
   intro. f_equal. exact H.
 Qed.
@@ -58,8 +57,6 @@ Proof.
   exact H. apply Nat.divide_refl.
 Qed.
 
-(* Nat.divide_add_r: forall n m p : nat,
-  Nat.divide n m -> Nat.divide n p -> Nat.divide n (m + p) *)
 Corollary evenPlusTwoIsEven: forall x, x mod 2 = 0 -> (S (S x)) mod 2 = 0.
 Proof.
   intros.
@@ -140,16 +137,6 @@ Proof.
   apply (divide_mul y x y x H (neq_refl 0 x (Nat.lt_neq 0 x H)) H0 H0).
 Qed.
 
-(*
-Nat.even_add_mul_2: forall n m : nat, Nat.even (n + 2 * m) = Nat.even n
-Nat.even_0: Nat.even 0 = true
-Nat.even_spec: forall n : nat, Nat.even n = true <-> Nat.Even n
-Nat.even_mul:
-  forall n m : nat, Nat.even (n * m) = Nat.even n || Nat.even m
-orb_diag: forall b : bool, b || b = b
-Nat.divide_factor_r: forall n m : nat, Nat.divide n (m * n)
-*)
-
 Lemma evenSquare_implies_even: forall x, Nat.Even (x*x) -> Nat.Even x.
 Proof.
   (* Maybe use Nat.even_pow instead? *)
@@ -186,7 +173,22 @@ Proof.
   exact H. apply even_div_2. exact H0.
 Qed.
 
-Definition coprime x y := forall a, a <> 1 -> Nat.divide a x -> ~ Nat.divide a y.
+(* The following use a worse definition of coprimality that forced me to use an axiom to complete the proof:
+
+Definition coprime x y := (forall a, a > 1 -> Nat.divide a x -> ~ Nat.divide a y) /\ (x <> 0) /\ (y <> 0).
+
+Axiom coprime_reduction: forall p q : nat, exists a b, coprime a b /\ p * b = a * q.
+
+Lemma coprime_comm: forall x y, coprime x y -> coprime y x.
+Proof.
+  unfold coprime. intros. refine (conj _ _). destruct H. Focus 2. destruct H. destruct H0. exact (conj H1 H0).
+  intros. specialize H with a. intro. apply H. exact H1. exact H3. exact H2.
+Qed.
+
+Lemma not_coprime_0_0: ~coprime 0 0.
+Proof.
+  unfold coprime, not. intros. destruct H. destruct H0. destruct H0. trivial.
+Qed.
 
 Theorem evens_not_coprime: forall x y, Nat.Even x /\ Nat.Even y -> ~coprime x y.
 Proof.
@@ -198,10 +200,38 @@ Proof.
   apply H0. omega. exact H.
 Qed.
 
-(*
-  There is a major flaw with the following proof, so far:
-  this is only shown to hold for rationals with coprime numerators and denominators.
 *)
+
+Definition coprime x y := Nat.gcd x y = 1.
+
+Lemma coprime_comm: forall x y, coprime x y -> coprime y x.
+Proof.
+  unfold coprime. intros. rewrite Nat.gcd_comm. exact H.
+Qed.
+
+Lemma not_coprime_0_0: ~coprime 0 0.
+Proof.
+  unfold coprime, not. rewrite Nat.gcd_0_r. trivial. discriminate.
+Qed.
+
+Theorem evens_not_coprime: forall x y, Nat.Even x /\ Nat.Even y -> ~coprime x y.
+Proof.
+  unfold not, coprime. intros.
+  rewrite even_div_2 in H. rewrite even_div_2 in H.
+  rewrite <- Nat.gcd_divide_iff in H. rewrite H0 in H.
+  apply Nat.divide_1_r in H. discriminate.
+Qed.
+
+Theorem fraction_simplification: forall p q : nat, q <> 0 -> exists a b, coprime a b /\ p * b = a * q.
+Proof.
+  intros. remember (Nat.gcd p q) as f.
+  refine (ex_intro _ (p/f) _). refine (ex_intro _ (q/f) _). refine (conj _ _).
+  Focus 2. rewrite Heqf. rewrite Nat.gcd_div_swap. trivial.
+  unfold coprime. apply Nat.gcd_div_gcd. intro.
+  rewrite H0 in Heqf. symmetry in Heqf. apply Nat.gcd_eq_0_r in Heqf.
+  contradiction. exact Heqf.
+Qed.
+
 Theorem weak_sqrt2_is_irrational: forall p q, coprime p q -> q <> 0 -> p * p <> q * q * 2.
 Proof.
   unfold not. intros p q COPRIME q_neq_0 main.
@@ -248,13 +278,6 @@ Proof.
   contradiction. omega.
 Qed.
 
-Axiom coprime_reduction: forall p q : nat, exists a b, coprime a b /\ p * b = a * q.
-
-(*Lemma coprime_0: forall n, ~coprime n 0.
-Proof.
-  unfold coprime, not. intros. specialize H with n. destruct H. admit. admit. admit. Admitted.
-  (*discriminate. SearchAbout Nat.divide. apply Nat.divide_0_l.*)*)
-
 Theorem strong_sqrt2_is_irrational: forall p q, q <> 0 -> p * p <> q * q * 2.
 Proof.
   intros.
@@ -262,45 +285,33 @@ Proof.
   Focus 2. apply classic.
   destruct H0.
   apply weak_sqrt2_is_irrational. exact H0. exact H.
-
   (* If p and q are not coprime, this implies that there exists
-  an a and b such that a*a = b*b*2, which is false *)
+  a coprime a and b such that a*a = b*b*2, which is false *)
   cut (exists a b, coprime a b /\ p * b = a * q). intro. destruct H1. destruct H1. destruct H1.
-  cut (x0 <> 0). intro x0_neq_0. Focus 2. admit.
+  cut (x0 <> 0). intro x0_neq_0.
+  Focus 2.
+    intro. rewrite H3 in H2. rewrite Nat.mul_0_r in H2.
+    rewrite <- H3 in H2. cut (Nat.divide x x0). intro.
+    cut (~coprime x x0). contradiction.
+    rewrite H2 in H3. apply Nat.eq_mul_0_l in H3.
+    rewrite H3 in H2. rewrite Nat.mul_0_l in H2. rewrite H2. rewrite H3.
+    apply not_coprime_0_0. exact H. refine (ex_intro _ q _). rewrite Nat.mul_comm. exact H2.
   intro. cut (p * p * x0 * x0 = x * x * q * q). intro.
   rewrite H3 in H4.
   cut (q * q * 2 * x0 * x0 = x0 * x0 * 2 * q * q). intro.
   rewrite H5 in H4. rewrite Nat.mul_cancel_r in H4. rewrite Nat.mul_cancel_r in H4.
   symmetry in H4. cut (x * x <> x0 * x0 * 2).
   contradiction.
-  apply weak_sqrt2_is_irrational. exact H1. exact x0_neq_0. (* This should be possible without yellow, and early *)
+  apply weak_sqrt2_is_irrational. exact H1. exact x0_neq_0.
   exact H. exact H.
   rewrite Nat.mul_comm. cut (x0 * x0 * 2 * q * q = x0 * (x0 * 2 * q * q)). intro. rewrite H5. rewrite Nat.mul_cancel_l.
   rewrite Nat.mul_comm. cut (x0 * 2 * q * q = x0 * (2 * q * q)). intro. rewrite H6. rewrite Nat.mul_cancel_l.
   rewrite Nat.mul_shuffle0. rewrite Nat.mul_cancel_r. rewrite Nat.mul_comm. trivial.
   exact H. exact x0_neq_0.
-  rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. reflexivity. exact x0_neq_0. (* Maybe avoid canceling x0s... *)
+  rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. reflexivity. exact x0_neq_0.
   rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. reflexivity.
   rewrite Nat.mul_comm. rewrite Nat.mul_assoc. rewrite Nat.mul_shuffle0. rewrite Nat.mul_shuffle3.
   rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. rewrite H2. rewrite Nat.mul_comm. rewrite Nat.mul_shuffle3. rewrite H2.
   rewrite Nat.mul_assoc. rewrite Nat.mul_cancel_r. rewrite Nat.mul_shuffle0. reflexivity. exact H.
-  apply coprime_reduction.
+  apply fraction_simplification. exact H.
 Qed.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
