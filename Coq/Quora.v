@@ -1,34 +1,8 @@
 Require Import Arith.
 Require Import Omega.
+Require Import BasicArithmetic.
 
-(* Problem taken from
-https://www.quora.com/How-do-I-prove-by-induction-that-2-n+2-+-3-2n+1-is-divisible-by-7
-
-Nat.pow_succ_r:
-  forall a b : nat,
-  0 <= b -> a ^ S b = a * a ^ b
-Nat.pow_add_r: forall a b c : nat, a ^ (b + c) = a ^ b * a ^ c
-Nat.le_0_l: forall n : nat, 0 <= n
-Nat.pow_mul_r: forall a b c : nat, a ^ (b * c) = (a ^ b) ^ c
-Nat.mod_mul: forall a b : nat, b <> 0 -> (a * b) mod b = 0
-Nat.add_1_r: forall n : nat, n + 1 = S n
-Nat.add_shuffle0: forall n m p : nat, n + m + p = n + p + m
-Nat.mul_add_distr_r: forall n m p : nat, (n + m) * p = n * p + m * p
-Nat.mul_add_distr_l: forall n m p : nat, n * (m + p) = n * m + n * p
-Nat.add_mod_idemp_l:
-  forall a b n : nat, n <> 0 -> (a mod n + b) mod n = (a + b) mod n
-Nat.add_mod_idemp_r:
-  forall a b n : nat, n <> 0 -> (a + b mod n) mod n = (a + b) mod n
-Nat.mul_mod:
-  forall a b n : nat, n <> 0 -> (a * b) mod n = (a mod n * (b mod n)) mod n
-
-SearchAbout Nat.pow.
-SearchAbout Nat.add.
-SearchAbout Nat.modulo.
-SearchAbout Nat.mul.
-
-*)
-
+(* Problem taken from https://www.quora.com/How-do-I-prove-by-induction-that-2-n+2-+-3-2n+1-is-divisible-by-7 *)
 Theorem quora1: forall n : nat, (2^(n+2)+3^(2*n+1)) mod 7 = 0.
 Proof.
   intros. induction n.
@@ -51,4 +25,21 @@ Proof.
   rewrite Nat.mul_mod.
   rewrite IHn. rewrite Nat.mul_0_l. trivial.
   omega. omega. omega. omega. omega. trivial. trivial. omega. omega.
+Qed.
+
+(* Problem taken from https://www.quora.com/How-do-you-prove-3-n-1-is-even *)
+Theorem quora2: forall n, Nat.Even (3^n-1).
+Proof.
+  intros. apply Nat.Odd_succ. rewrite <- Nat.add_1_r. rewrite Nat.sub_add.
+  rewrite <- Nat.odd_spec.
+  induction n. trivial.
+  rewrite Nat.pow_succ_r'.
+  rewrite Nat.odd_mul. simpl. exact IHn.
+  induction n. rewrite Nat.pow_0_r. trivial.
+  rewrite Nat.pow_succ_r'.
+  cut (3 <= 3 * 3^n). intro.
+  specialize Nat.le_trans with 1 3 (3*3^n). intro.
+  apply H0. omega. exact H.
+  cut (3 = 3 * 1). intro. rewrite H.
+  apply Nat.mul_le_mono_l. apply IHn. omega.
 Qed.
