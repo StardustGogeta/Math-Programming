@@ -1,11 +1,19 @@
-from time import clock
+from time import perf_counter as clock
 start = clock()
 txt = open("english_words.txt")
-english = list(x for x in txt.read().upper().splitlines() if 2 < len(x) < 18)
+english = sorted(x for x in txt.read().upper().splitlines() if 2 < len(x) < 18)
 txt.close()
 
-def findWordsStartingWith(s, words = english):
-    return list(x for x in words if x.startswith(s))
+def findConsecutiveEligible(s, d, words = english):
+    elig = 0
+    for word in words:
+        try:
+            if word[d] == s:
+                elig = 1
+                yield word
+            elif elig:
+                break
+        except IndexError: pass
 
 def getAdjacentCoords(coords): # path consists of letters already used
     y, x = coords
@@ -28,16 +36,17 @@ b.close()
 board = [boardTxt[x*4:(x+1)*4] for x in range(4)] # Would have to be rewritten for Qu combo
 #print(board)
 
-def formWords(coords, board, path, master, tempWord = '', prevSubset = english):
-    tempWord += board[coords[0]][coords[1]]
-    wordsSubset = findWordsStartingWith(tempWord, prevSubset)
+def formWords(coords, board, path, master, depth = 0, tempWord = '', prevSubset = english):
+    char = board[coords[0]][coords[1]]
+    tempWord += char
+    wordsSubset = list(findConsecutiveEligible(char, depth, prevSubset))
     if len(wordsSubset):
         path.append(coords)
-        if len(tempWord) > 2 and tempWord in prevSubset:
+        if depth > 1 and tempWord in prevSubset:
             master.add(tempWord)
         for c in getAdjacentCoords(coords):
             if c not in path:
-                formWords(c, board, list(path), master, tempWord, wordsSubset)
+                formWords(c, board, list(path), master, depth + 1, tempWord, wordsSubset)
 
 masterList = set()
 for y in range(4):
