@@ -56,8 +56,7 @@ Proof.
   apply (weak_sqrt2_is_irrational x x0 H1 x0_neq_0). exact H. exact H.
   rewrite Nat.mul_comm. cut (x0 * x0 * 2 * q * q = x0 * (x0 * 2 * q * q)). intro. rewrite H5. rewrite Nat.mul_cancel_l.
   rewrite Nat.mul_comm. cut (x0 * 2 * q * q = x0 * (2 * q * q)). intro. rewrite H6. rewrite Nat.mul_cancel_l.
-  rewrite Nat.mul_shuffle0. rewrite Nat.mul_cancel_r. rewrite Nat.mul_comm. trivial.
-  exact H. exact x0_neq_0.
+  rewrite Nat.mul_shuffle0. rewrite <- Nat.mul_assoc. rewrite Nat.mul_shuffle3. rewrite Nat.mul_assoc. trivial. exact x0_neq_0.
   rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. reflexivity. exact x0_neq_0.
   rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. reflexivity.
   rewrite Nat.mul_comm. rewrite Nat.mul_assoc. rewrite Nat.mul_shuffle0. rewrite Nat.mul_shuffle3.
