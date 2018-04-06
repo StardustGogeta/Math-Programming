@@ -156,17 +156,27 @@ Proof.
   rewrite Nat.even_add_mul_2. trivial. omega.
 Qed.
 
-Lemma twoAsFactor_implies_even: forall x, x <> 0 -> (exists y, y * 2 = x) <-> Nat.Even x.
-Proof.
+Lemma twoAsFactor_implies_even: forall x, (exists y, y * 2 = x) <-> Nat.Even x.
+Proof. (* TODO: Use the identities used here in order to remove nonzero condition in div_implies_mul *)
   unfold iff. intros. refine (conj _ _).
-  intros. destruct H0 as [A B].
+  intros. destruct H as [A B].
   refine (ex_intro _ A _). (* I came upon this by mistake *)
-  rewrite Nat.mul_comm. symmetry. exact B.
-  intros.
+  rewrite Nat.mul_comm. symmetry. exact B. intros.
   remember (x/2) as y.
-  apply div_implies_mul in Heqy.
-  refine (ex_intro _ y _). rewrite Nat.mul_comm. exact Heqy.
-  exact H. apply even_div_2. exact H0.
+  cut (Nat.divide 2 x). intro A.
+  cut (2 * y = 2 * (x / 2)). intro B.
+  cut (2 * y = x * 2 / 2). intro C.
+  rewrite Nat.div_mul in C.
+  refine (ex_intro _ y _). rewrite Nat.mul_comm. exact C. omega.
+  Focus 2.
+  rewrite Nat.mul_cancel_l. exact Heqy. omega.
+  rewrite B. cut (x=2*(x/2)). intro D.
+  Focus 3.
+  apply even_div_2. apply H.
+  Focus 2.
+  rewrite Nat.div_exact.
+  apply Nat.mod_divide. omega. apply even_div_2. apply H. omega.
+  rewrite <- D. rewrite Nat.div_mul. trivial. omega.
 Qed.
 
 (* The following use a worse definition of coprimality that forced me to use an axiom to complete the proof:
