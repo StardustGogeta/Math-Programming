@@ -45,8 +45,8 @@ Proof.
   Focus 2.
     intro. apply H. rewrite H3 in H2. rewrite Nat.mul_0_r in H2.
     apply (Nat.eq_mul_0_r x q). symmetry. exact H2.
-    unfold coprime in H1. intro. rewrite H4 in H1. rewrite H3 in H1.
-    rewrite Nat.gcd_0_r in H1. discriminate.
+    unfold coprime in H1. rewrite H3 in H1.
+    rewrite Nat.gcd_0_r in H1. rewrite H1. omega.
   intro. cut (p * p * x0 * x0 = x * x * q * q). intro.
   rewrite H3 in H4.
   cut (q * q * 2 * x0 * x0 = x0 * x0 * 2 * q * q). intro.
@@ -54,13 +54,10 @@ Proof.
   symmetry in H4. cut (x * x <> x0 * x0 * 2).
   contradiction.
   apply (weak_sqrt2_is_irrational x x0 H1 x0_neq_0). exact H. exact H.
-  rewrite Nat.mul_comm. cut (x0 * x0 * 2 * q * q = x0 * (x0 * 2 * q * q)). intro. rewrite H5. rewrite Nat.mul_cancel_l.
-  rewrite Nat.mul_comm. cut (x0 * 2 * q * q = x0 * (2 * q * q)). intro. rewrite H6. rewrite Nat.mul_cancel_l.
-  rewrite Nat.mul_shuffle0. rewrite <- Nat.mul_assoc. rewrite Nat.mul_shuffle3. rewrite Nat.mul_assoc. trivial. exact x0_neq_0.
-  rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. reflexivity. exact x0_neq_0.
-  rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. reflexivity.
-  rewrite Nat.mul_comm. rewrite Nat.mul_assoc. rewrite Nat.mul_shuffle0. rewrite Nat.mul_shuffle3.
-  rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. rewrite H2. rewrite Nat.mul_comm. rewrite Nat.mul_shuffle3. rewrite H2.
-  rewrite Nat.mul_assoc. rewrite Nat.mul_cancel_r. rewrite Nat.mul_shuffle0. reflexivity. exact H.
+  remember (q*q) as q_sq. remember (x0*x0) as x0_sq. rewrite <- Nat.mul_assoc. rewrite <- Heqx0_sq.
+  rewrite <- Nat.mul_assoc. rewrite <- Nat.mul_assoc. rewrite <- Heqq_sq. rewrite Nat.mul_comm.
+  rewrite <- Nat.mul_assoc. rewrite <- Nat.mul_shuffle3. rewrite Nat.mul_assoc. trivial.
+  rewrite Nat.mul_comm. rewrite Nat.mul_assoc. rewrite Nat.mul_assoc. rewrite Nat.mul_comm in H2. rewrite H2. rewrite Nat.mul_shuffle0.
+  rewrite <- Nat.mul_assoc. rewrite H2. rewrite Nat.mul_shuffle1. rewrite Nat.mul_assoc. trivial.
   apply fraction_simplification. exact H.
 Qed.
