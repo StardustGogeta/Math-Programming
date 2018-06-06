@@ -4,6 +4,12 @@ Require Import Rbase Rfunctions Rlimit Classical_Prop.
 (* Local Open Scope nat_scope. *)
 Local Open Scope R_scope.
 
+(*
+Rplus_eq_reg_r: forall r r1 r2 : R, r1 + r = r2 + r -> r1 = r2
+Rplus_eq_compat_l: forall r r1 r2 : R, r1 = r2 -> r + r1 = r + r2
+Rplus_eq_compat_r: forall r r1 r2 : R, r1 = r2 -> r1 + r = r2 + r
+*)
+
 Theorem Rminus_opp: forall a b : R, a-b = a+-b.
 Proof.
   intros. trivial.
@@ -55,12 +61,46 @@ Proof.
 Qed.
 
 (* The function f is linear *)
-Definition linear f := exists a b, forall x, f(x)=a*x+b.
+Definition linear1 f := exists a b, forall x, f(x)=a*x+b. (* Slope-intercept *)
+Definition linear2 f := exists a h k, forall x, f(x)-k=a*(x-h). (* Point-slope *)
+Definition linear3 f := exists a b c, b <> 0 /\ forall x, a*x+b*f(x)+c=0. (* Standard form *)
+Definition linear f := linear1 f.
+
+Theorem linearEquiv12: forall f, linear1 f <-> linear2 f.
+Proof.
+  unfold iff, linear1, linear2. intros. refine (conj _ _). intro.
+  destruct H as [a H]. destruct H as [b H].
+  refine (ex_intro _ a _). refine (ex_intro _ 0 _). refine (ex_intro _ b _).
+  intros. rewrite Rminus_0_r. specialize H with x. rewrite Rminus_opp.
+  rewrite H. rewrite Rplus_assoc. rewrite Rplus_opp_r. rewrite Rplus_0_r. trivial.
+  intros. destruct H as [a H]. destruct H as [h H]. destruct H as [k H].
+  refine (ex_intro _ a _). refine (ex_intro _ (-(a*h)+k) _). intro. specialize H with x.
+  rewrite <- Rplus_assoc. apply (Rplus_eq_reg_r (-k) (f x) (a*x+-(a*h)+k)).
+  rewrite Rplus_assoc. rewrite Rplus_opp_r. rewrite Rplus_0_r.
+  rewrite <- Rminus_opp. rewrite <- Rminus_opp. rewrite H. apply (Rmult_minus_distr_l a x h).
+Qed.
+
+Theorem linearEquiv13: forall f, linear1 f <-> linear3 f.
+Proof.
+  unfold iff, linear1, linear3. intros. refine (conj _ _). intro.
+  destruct H as [a H]. destruct H as [b H].
+  refine (ex_intro _ (-a) _). refine (ex_intro _ 1 _). refine (ex_intro _ (-b) _). refine (conj _ _). apply R1_neq_R0.
+  intros. rewrite Rmult_1_l. specialize H with x. rewrite H.
+  rewrite <- Rplus_assoc. rewrite <- Ropp_mult_distr_l. rewrite Rplus_opp_l. rewrite Rplus_0_l. rewrite Rplus_opp_r. trivial.
+  intros. destruct H as [a H]. destruct H as [b H]. destruct H as [c H].
+  refine (ex_intro _ (-a*/b) _). refine (ex_intro _ (-c*/b) _). intro. destruct H. specialize H0 with x.
+  apply (Rmult_eq_compat_l (/b) (a * x + b * f x + c) 0) in H0. rewrite Rmult_plus_distr_l in H0. rewrite Rmult_plus_distr_l in H0.
+  rewrite Rmult_0_r in H0. rewrite <- Rmult_assoc in H0. rewrite <- Rmult_assoc in H0. rewrite Rinv_l in H0.
+  rewrite Rmult_1_l in H0. apply (Rplus_eq_reg_l (a * / b * x) (f x) (- a * / b * x + - c * / b)).
+  remember (a*/b) as A. rewrite <- Rplus_assoc. rewrite <- Ropp_mult_distr_l. rewrite <- HeqA. rewrite <- Ropp_mult_distr_l. rewrite Rplus_opp_r. rewrite Rplus_0_l.
+  rewrite <- Ropp_mult_distr_l. remember (c*/b) as C. apply (Rplus_eq_reg_l C (A*x+f x) (-C)). rewrite Rplus_opp_r. Focus 2. exact H.
+  rewrite Rmult_comm in HeqC. rewrite <- HeqC in H0. rewrite Rmult_comm in HeqA. rewrite <- HeqA in H0. rewrite Rplus_comm. exact H0.
+Qed.
 
 (* The function f(x)=x is linear *)
 Theorem x_is_linear: linear (fun x : R => x).
 Proof.
-  unfold linear. refine (ex_intro _ 1 _). refine (ex_intro _ 0 _).
+  refine (ex_intro _ 1 _). refine (ex_intro _ 0 _).
   intros. rewrite Rplus_0_r. rewrite Rmult_1_l. trivial.
 Qed.
 
@@ -98,7 +138,7 @@ Proof. (* Coq is not smart enough to simplify 5-3=2 *)
   remember (fun x : R => 5*x-3) as f. cut (linear f). intros.
   cut (f(1)=(5-3)). intros. rewrite <- H0. apply continuousSubstitution.
   apply linear_is_continuous. apply H. rewrite Heqf. rewrite Rmult_1_r. trivial.
-  unfold linear. refine (ex_intro _ 5 _). refine (ex_intro _ (-3) _).
+  refine (ex_intro _ 5 _). refine (ex_intro _ (-3) _).
   intros. rewrite Heqf. rewrite Rminus_opp. trivial.
 Qed.
 
