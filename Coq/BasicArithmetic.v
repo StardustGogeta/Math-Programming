@@ -91,7 +91,7 @@ Proof.
 Qed.
 
 Lemma div_implies_mul: forall a b c, b <> 0 -> Nat.divide c b -> a = b / c -> c * a = b.
-Proof.
+Proof. (* TODO: Remove the nonzero condition, if possible *)
   intros. rewrite H1.
   cut (b mod c = 0). intro.
   cut (c * (b/c) + 0 = c * (b/c)). intro.
@@ -135,11 +135,17 @@ Qed.
 
 Lemma evenSquare_implies_even: forall x, Nat.Even (x*x) -> Nat.Even x.
 Proof.
-  (* Maybe use Nat.even_pow instead? *)
-  intros. apply Nat.even_spec in H.
-  rewrite Nat.even_mul in H.
-  rewrite orb_diag in H.
-  apply Nat.even_spec. exact H.
+  intros. rewrite <- Nat.pow_2_r in H. apply Nat.even_spec in H.
+  rewrite Nat.even_pow in H. apply Nat.even_spec. exact H. omega.
+Qed.
+
+Lemma twoAsFactor_implies_even: forall x, (exists y, x = y * 2) <-> Nat.Even x.
+Proof.
+  unfold Nat.Even. intuition.
+  destruct H. refine (ex_intro _ x0 _).
+  rewrite Nat.mul_comm. auto.
+  destruct H. refine (ex_intro _ x0 _).
+  rewrite Nat.mul_comm. auto.
 Qed.
 
 (* There is a massive schism between the Nat.divide, Nat.modulo, and Nat.even / Nat.Even
@@ -147,36 +153,8 @@ Qed.
   that I could finally achieve this without setting a new axiom. *)
 Theorem even_div_2: forall x, Nat.Even x <-> Nat.divide 2 x.
 Proof.
-  intros. unfold iff. refine (conj _ _). intros.
-  destruct H. rewrite H. apply Nat.divide_factor_l.
-  intros. destruct H. rewrite <- Nat.even_spec.
-  rewrite H. rewrite <- Nat.even_0.
-  cut (x0 * 2 = 0 + x0 * 2). intro. rewrite H0.
-  rewrite Nat.mul_comm.
-  rewrite Nat.even_add_mul_2. trivial. omega.
-Qed.
-
-Lemma twoAsFactor_implies_even: forall x, (exists y, y * 2 = x) <-> Nat.Even x.
-Proof. (* TODO: Use the identities used here in order to remove nonzero condition in div_implies_mul *)
-  unfold iff. intros. refine (conj _ _).
-  intros. destruct H as [A B].
-  refine (ex_intro _ A _). (* I came upon this by mistake *)
-  rewrite Nat.mul_comm. symmetry. exact B. intros.
-  remember (x/2) as y.
-  cut (Nat.divide 2 x). intro A.
-  cut (2 * y = 2 * (x / 2)). intro B.
-  cut (2 * y = x * 2 / 2). intro C.
-  rewrite Nat.div_mul in C.
-  refine (ex_intro _ y _). rewrite Nat.mul_comm. exact C. omega.
-  Focus 2.
-  rewrite Nat.mul_cancel_l. exact Heqy. omega.
-  rewrite B. cut (x=2*(x/2)). intro D.
-  Focus 3.
-  apply even_div_2. apply H.
-  Focus 2.
-  rewrite Nat.div_exact.
-  apply Nat.mod_divide. omega. apply even_div_2. apply H. omega.
-  rewrite <- D. rewrite Nat.div_mul. trivial. omega.
+  unfold Nat.divide. symmetry.
+  apply twoAsFactor_implies_even.
 Qed.
 
 (* The following use a worse definition of coprimality that forced me to use an axiom to complete the proof:
