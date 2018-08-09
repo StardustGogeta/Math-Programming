@@ -165,4 +165,4 @@ p46 n f = sequence_ (map printLn (map (decToBinFixedLen n) [0..2^n-1]))
 -- Each new layer has the old one with zeros overlaid, then the reversed old with ones overlaid
 p49 :: Integral a => a -> [String]
 p49 1 = ["0", "1"]
-p49 n = map ('0':) (gray (n-1)) ++ map ('1':) (reverse $ gray (n-1))
+p49 n = map ('0':) (p49 (n-1)) ++ map ('1':) (reverse $ p49 (n-1))
