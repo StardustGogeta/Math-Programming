@@ -1,32 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
 
-void main()
-{
-	char *fN = (char*) malloc(500);
-	int fB; int sB;
-	puts("What is the number?");
-	scanf("%s",fN);
-	puts("What is the current base? (<=36)");
-	scanf("%d",&fB);
-	puts("What is the desired base? (<=10)");
-	scanf("%d",&sB);
-	if (1<fB<37 && 1<sB<11)
-	{
-		long tVT = strtol(fN,NULL,fB);
-		char *sN = (char*) malloc(500);
-		char *t = (char*) malloc(500);
-		while (tVT)
-		{
-            		sprintf(t,"%d",tVT%sB);
-            		strcat(t,sN);
-            		strcpy(sN,t);
-            		tVT/=sB;
-		}
-		printf("\nYour number is %s.\n",sN);
-	}
-	else
-		puts("\nStop wasting time.");
+void main() {
+    char num[500];
+    int fromBase, toBase;
+    printf("What is the number?\n");
+    scanf("%s", &num);
+    printf("What is the current base? (<=36)\n");
+    scanf("%d", &fromBase);
+    printf("What is the desired base? (<=10)\n");
+    scanf("%d", &toBase);
+    if (1 < fromBase < 37 && 1 < toBase < 11) {
+        char ret[500] = "", temp[2] = "";
+        unsigned long long n = strtoull(num, NULL, fromBase);
+        while (n) {
+            sprintf(temp, "%d", n % toBase);
+            strcat(ret, temp);
+            n /= toBase;
+        }
+        printf("\nYour number is %s.\n", strrev(ret));
+    }
+    else
+        printf("\nInvalid base!\n");
 }
