@@ -24,6 +24,9 @@ Qed.
 (* Proven with epsilon-delta *)
 Definition lim f c L := forall eps x, exists delta, 0 < Rabs(x-c) < delta -> Rabs(f(x)-L) < eps.
 
+(* Limit of f as x goes to infinity is L *)
+Definition limInf f L := forall eps x, exists delta, delta < x -> Rabs(f(x)-L) < eps.
+
 (* This version of the example proves the limit using the proper epsilon-delta conversion *)
 Remark limit_example_naive: lim (fun x : R => x) 3 3.
 Proof.
@@ -141,6 +144,63 @@ Proof. (* Coq is not smart enough to simplify 5-3=2 *)
   refine (ex_intro _ 5 _). refine (ex_intro _ (-3) _).
   intros. rewrite Heqf. rewrite Rminus_opp. trivial.
 Qed.
+
+(*Definition limit f c : R := *)
+(* The derivative of f as x approaches a is f' *)
+Definition derivative f a f' := lim (fun x : R => (f x-f a)/(x-a)) a f'.
+
+(* The derivative of f(x)=x at x=0 is 1 *)
+Theorem x_has_derivative_1_at_0: derivative (fun x : R => x) 0 1.
+Proof.
+  unfold derivative, lim. intros.
+  refine (ex_intro _ eps _). rewrite Rminus_0_r. rewrite Rdiv_inv. intro. destruct H. rewrite Rinv_r.
+  rewrite Rminus_opp. rewrite Rplus_opp_r. rewrite Rabs_R0.
+  apply (Rle_lt_trans 0 (Rabs x) eps). apply Rabs_pos. exact H0.
+  apply Rlt_not_eq in H. intro. rewrite H1 in H. rewrite Rabs_R0 in H. apply H. trivial.
+Qed.
+
+(* For all linear f, the derivative is a constant, m *)
+Theorem derivative_of_linear_is_constant: forall f, linear f -> exists m, forall c, derivative f c m.
+Proof.
+  unfold derivative, linear, linear1, lim. intros.
+  destruct H as [a H]. destruct H as [b H].
+  refine (ex_intro _ a _). intros. refine (ex_intro _ eps _). intro E.
+  assert (H1 := H). specialize H with x. specialize H1 with c. rewrite Rplus_comm in H.
+  rewrite H, H1. cut ((b+a*x-(a*c+b))/(x-c)=a). intro. rewrite H0.
+  rewrite Rminus_opp, Rplus_opp_r, Rabs_R0. destruct E.
+  apply (Rle_lt_trans 0 (Rabs (x-c)) eps). apply Rabs_pos. exact H3.
+  rewrite Rminus_opp. rewrite Rminus_opp. rewrite Ropp_plus_distr.
+  rewrite <- Rplus_assoc. rewrite <- Rplus_comm. rewrite <- Rplus_assoc. rewrite <- Rplus_assoc.
+  rewrite Rplus_opp_l, Rplus_0_l, Ropp_mult_distr_r. rewrite <- Rmult_plus_distr_l.
+  apply Rinv_r_simpl_l. destruct E. rewrite <- Rminus_opp.
+  apply Rlt_not_eq in H0. intro. rewrite H3 in H0. rewrite Rabs_R0 in H0. apply H0. trivial.
+Qed.
+
+Theorem geometric_limit_to_zero: limInf (fun x : R => /x) 0.
+Proof.
+  unfold limInf. intros. refine (ex_intro _ (Rmin 1 (/eps)) _). rewrite Rminus_0_r.
+  intros. cut (eps > 1 \/ eps <= 1). intro. destruct H0. assert (E := H0).
+  apply Rinv_lt_contravar in H0. SearchAbout Rmin.
+  cut (Rmin 1 (/eps) = /eps). intro. rewrite H1 in H.
+  rewrite Rinv_1 in H0.
+  (* Rinv_lt_contravar: forall r1 r2 : R, 0 < r1 * r2 -> r1 < r2 -> / r2 < / r1 *)
+  apply Rinv_lt_contravar in H. rewrite Rinv_involutive in H. 
+  SearchAbout Rabs. apply (Rle_lt_trans (/x) (Rabs(/x)) eps).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
