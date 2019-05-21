@@ -7,7 +7,7 @@
 // Define a Node structure that holds an int and a pointer to the next Node
 typedef struct Node {
     int val;
-    struct Node *next; // You must have a pointer here, and you must you the `struct` keyword
+    struct Node *next; // You must have a pointer here, and you must use the `struct` keyword
 } Node; // This allows you to write `Node` or `struct Node` as the type
 
 // Construct a new valid Node and allocate memory
