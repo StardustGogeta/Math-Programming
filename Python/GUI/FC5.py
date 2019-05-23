@@ -2,7 +2,7 @@ from decimal import *
 import math
 
 def convert(n):
-    getcontext().prec = math.floor(math.log10(n))
+    getcontext().prec = math.ceil(math.log10(n))
     numlist=[1]
     while n-1:
             f = int(findFactor(n))

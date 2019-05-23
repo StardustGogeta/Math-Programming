@@ -83,8 +83,8 @@ class BCMenu:
         self.button.pack(fill=BOTH,expand=True)
         self.result.pack(fill=BOTH,expand=True)
         
-    def calc(self, a=1, b=1, c=1):
-        a = int(self.entry.get())
+    def calc(self, a='0', b=2, c=2):
+        a = self.entry.get()
         b = int(self.entry2.get())
         c = int(self.entry3.get())
         final = BC.convert(a,b,c)
