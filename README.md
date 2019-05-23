@@ -4,7 +4,7 @@
 
 ### What is this?
 
-This respository began as a recreation of my old math projects on Scratch, along with other math-themed projects.
+This repository began as a recreation of my old math projects on Scratch, along with other math-themed projects.
 Now, it has grown into an amalgamation of small projects that wouldn't quite fit anywhere else, or which don't deserve their own repository. Descriptions of these various projects are below, organized by programming language.
 This repository also documents my growth as a programmer as I learn new languages and techniques and put them to use for the first time.
 
