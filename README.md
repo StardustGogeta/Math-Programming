@@ -16,17 +16,23 @@ The Code::Blocks IDE was used for the Fortran, D, C, and C++ files (with MinGW o
 Use Visual Studio for Visual Basic and C#, the most recent version of the JDK/JRE for the Java files, CLISP with the LispIDE for the Lisp files, SWI-Prolog for the Prolog files, and Strawberry Perl for the Perl files.
 This should all work fairly well without any difficulties. The languages not mentioned should not need any special setup procedures.
 
-## Project Descriptions by Language
+## __Project Descriptions by Language__
 
 ### `C#`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *CES* (Circle Equation Solver): Determines the equation of a circle through three points.
   - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
 
+</details>
+
+---
+
 ### `C++`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *Base Converter*: Converts an integer between two different bases.
   - *Circle Equation Solver*: Determines the equation of a circle through three points.
   - *Coin Flipper*: Simulates the repeated flipping of a coin.
@@ -35,17 +41,28 @@ This should all work fairly well without any difficulties. The languages not men
   - *Line Intercept Calculator*: Finds the intersection point of two lines given in slope-intercept form or two-point form.
   - *Trigonometric Ratios*: Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
 
+</details>
+
+---
+
 ### `C`
 
 - **LinkedList**: Implements a basic linked-list structure and common operations.
-- **Minor Math Projects**
+
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *Base Converter*: Converts an integer between two different bases.
   - *Circle Equation Solver*: Determines the equation of a circle through three points.
   - *Factor Calculator 4*: Lists all divisors of a given integer.
 
+</details>
+
+---
+
 ### `Common Lisp`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *BC* (Base Converter): Converts an integer between two different bases.
   - *CA* (Coterminal Angles): Given an initial angle measurement, finds the coterminal angle closest to 0°.
   - *CES* (Circle Equation Solver): Determines the equation of a circle through three points.
@@ -55,28 +72,52 @@ This should all work fairly well without any difficulties. The languages not men
   - *LIC* (Line Intercept Calculator): Finds the intersection point of two lines given in slope-intercept form or two-point form.
   - *TR* (Trigonometric Ratios): Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
 
+</details>
+
+---
+
 ### `Coq`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *To be completed...*
+
+</details>
+
+---
 
 ### `D`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *CoinFlipper*: Simulates the repeated flipping of a coin.
   - *FactorCalculator4*: Lists all divisors of a given integer.
 
+</details>
+
+---
+
 ### `Fortran 95`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *CA* (Coterminal Angles): Given an initial angle measurement, finds the coterminal angle closest to 0°.
   - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
   - *TR* (Trigonometric Ratios): Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
 
+</details>
+
+---
+
 ### `Go`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
+
+</details>
+
+---
 
 ### `Haskell`
 
@@ -84,7 +125,9 @@ This should all work fairly well without any difficulties. The languages not men
 - **Boggle** (unfinished): Finds all possible words in a given [Boggle](https://en.wikipedia.org/wiki/Boggle) board.
 - **eightQueens**: Finds all solutions to the eight queens problem.
 - **Quicksort**: Implements quicksort for a list of integers.
-- **Minor Math Projects**
+
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *CES* (Circle Equation Solver): Determines the equation of a circle through three points.
   - *Cardinality*: Maps input integers to the even and odd numbers to illustrate that the cardinality of each set is the same as that of the integers.
   - *CoinFlipper*: Simulates the repeated flipping of a coin.
@@ -95,37 +138,66 @@ This should all work fairly well without any difficulties. The languages not men
   - *Pascal*: Computes the entries in Pascal's triangle.
   - *SKI_Logic*: Defines the basic combinators of SKI combinator calculus.
 
+</details>
+
+---
+
 ### `Java`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *BC* (Base Converter): Converts an integer between two different bases.
   - *CES* (Circle Equation Solver): Determines the equation of a circle through three points.
   - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
 
+</details>
+
+---
+
 ### `Pascal`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
+
+</details>
+
+---
 
 ### `Perl`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
+
+</details>
+
+---
 
 ### `Prolog`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *ces* (Circle Equation Solver): Determines the equation of a circle through three points.
   - *coterminal*: Given an initial angle measurement, finds the coterminal angle closest to 0°.
   - *fc4* (Factor Calculator 4): Lists all divisors of a given integer.
   - *repCount*: Counts the number of occurrences of a given element in a list.
   - *test*: Experiments with small features of the Prolog language.
 
-### `Perl`
+</details>
 
-- **Minor Math Projects**
+---
+
+### `Pyth`
+
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *FC2* (Factor Calculator 2): Lists all divisors of a given integer, without the square-root optimization.
   - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
+
+</details>
+
+---
 
 ### `Python`
 
@@ -134,31 +206,52 @@ This should all work fairly well without any difficulties. The languages not men
 - **Boggle**: Finds all possible words in a given [Boggle](https://en.wikipedia.org/wiki/Boggle) board.
 - **Blackjack**: Plays a simple game of blackjack with human or computer players against the dealer.
 - **DealOrNoDeal**: Simulates the game show [Deal or No Deal](https://en.wikipedia.org/wiki/Deal_or_No_Deal_(U.S._game_show)) for the purpose of testing different strategies.
+- **GUI Toolbox**: Provides a visual interface for many of my common math mini-projects, accessed via `main.pyw`.
+  - *BC* (Base Converter): Converts an integer between two different bases.
+  - *CA* (Coterminal Angles): Given an initial angle measurement, finds the coterminal angle closest to 0°.
+  - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
+  - *FC5* (Factor Calculator 5): Lists all divisors of a given integer, with an optimization for much larger inputs that have small prime factors.
+  - *LIC* (Line Intercept Calculator): Finds the intersection point of two lines given in slope-intercept form or two-point form.
+  - *TR* (Trigonometric Ratios): Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
 - **PartCompare**: Uses Selenium to search [UserBenchmark](https://userbenchmark.com) for computer part comparisons.
 - **Snake**: Plays a basic version of the game Snake.
 - **SudokuSolverBacktracking**: Uses backtracking to find a solution to a given Sudoku puzzle grid.
 - **TicTacToe**: Plays a simple game of tic-tac-toe with human or computer players.
-- **Minor Math Projects**
+
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *CircleEquationSolver*: Determines the equation of a circle through three points.
   - *CoinFlipper*: Simulates the repeated flipping of a coin.
-  - *FC4* / *FC4-Recursion* (Factor Calculator 4): Lists all divisors of a given integer.
+  - *FC4-Recursion* (Factor Calculator 4): Lists all divisors of a given integer.
   - *Fibonacci*: Computes the entries in the Fibonacci sequence.
   - *InfiniteGeometricSum*: Calculates the sum of an infinite geometric series.
   - *PolynomialFitter*: Finds the minimal-degree polynomial function which passes through a set of points.
   - *RadicalSimplifier*: Simplifies a radical expression by extracting perfect squares from the radicand.
   - *TowersOfHanoi*: Finds a solution to the Towers of Hanoi puzzle.
 
+</details>
+
+---
+
 ### `R`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
   - *FC5* (Factor Calculator 5): Lists all divisors of a given integer, with an optimization for much larger inputs that have small prime factors.
 
+</details>
+
+---
+
 ### `Visual Basic .NET`
 
-- **Minor Math Projects**
+<details><summary><b>Minor Math Projects</b></summary>
+
   - *Base Converter*: Converts an integer between two different bases.
   - *Circle Equation Solver*: Determines the equation of a circle through three points.
   - *Coterminal Angles*: Given an initial angle measurement, finds the coterminal angle closest to 0°.
   - *Factor Calculator 4*: Lists all divisors of a given integer.
   - *Trigonometric Ratios*: Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
+
+</details>
