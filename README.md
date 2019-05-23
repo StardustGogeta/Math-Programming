@@ -6,7 +6,7 @@
 
 This respository began as a recreation of my old math projects on Scratch, along with other math-themed projects.
 Now, it has grown into an amalgamation of small projects that wouldn't quite fit anywhere else, or which don't deserve their own repository. Descriptions of these various projects are below, organized by programming language.
-This repository also documents my growth as a programmer as I learn new languages and techniques, and put them to use for the first time.
+This repository also documents my growth as a programmer as I learn new languages and techniques and put them to use for the first time.
 
 ### How do I use this?
 
@@ -22,8 +22,8 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *CES* (Circle Equation Solver): Determines the equation of a circle through three points.
-  - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
+- CES (Circle Equation Solver): Determines the equation of a circle through three points.
+- FC4 (Factor Calculator 4): Lists all divisors of a given integer.
 
 </details>
 
@@ -33,13 +33,13 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *Base Converter*: Converts an integer between two different bases.
-  - *Circle Equation Solver*: Determines the equation of a circle through three points.
-  - *Coin Flipper*: Simulates the repeated flipping of a coin.
-  - *Coterminal Angles*: Given an initial angle measurement, finds the coterminal angle closest to 0°.
-  - *Factor Calculator 4*: Lists all divisors of a given integer.
-  - *Line Intercept Calculator*: Finds the intersection point of two lines given in slope-intercept form or two-point form.
-  - *Trigonometric Ratios*: Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
+- Base Converter: Converts an integer between two different bases.
+- Circle Equation Solver: Determines the equation of a circle through three points.
+- Coin Flipper: Simulates the repeated flipping of a coin.
+- Coterminal Angles: Given an initial angle measurement, finds the coterminal angle closest to 0°.
+- Factor Calculator 4: Lists all divisors of a given integer.
+- Line Intercept Calculator: Finds the intersection point of two lines given in slope-intercept form or two-point form.
+- Trigonometric Ratios: Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
 
 </details>
 
@@ -51,9 +51,9 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *Base Converter*: Converts an integer between two different bases.
-  - *Circle Equation Solver*: Determines the equation of a circle through three points.
-  - *Factor Calculator 4*: Lists all divisors of a given integer.
+- Base Converter: Converts an integer between two different bases.
+- Circle Equation Solver: Determines the equation of a circle through three points.
+- Factor Calculator 4: Lists all divisors of a given integer.
 
 </details>
 
@@ -63,14 +63,14 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *BC* (Base Converter): Converts an integer between two different bases.
-  - *CA* (Coterminal Angles): Given an initial angle measurement, finds the coterminal angle closest to 0°.
-  - *CES* (Circle Equation Solver): Determines the equation of a circle through three points.
-  - *CoinFlipper*: Simulates the repeated flipping of a coin.
-  - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
-  - *FC5* (Factor Calculator 5): Lists all divisors of a given integer, with an optimization for much larger inputs that have small prime factors.
-  - *LIC* (Line Intercept Calculator): Finds the intersection point of two lines given in slope-intercept form or two-point form.
-  - *TR* (Trigonometric Ratios): Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
+- BC (Base Converter): Converts an integer between two different bases.
+- CA (Coterminal Angles): Given an initial angle measurement, finds the coterminal angle closest to 0°.
+- CES (Circle Equation Solver): Determines the equation of a circle through three points.
+- CoinFlipper: Simulates the repeated flipping of a coin.
+- FC4 (Factor Calculator 4): Lists all divisors of a given integer.
+- FC5 (Factor Calculator 5): Lists all divisors of a given integer, with an optimization for much larger inputs that have small prime factors.
+- LIC (Line Intercept Calculator): Finds the intersection point of two lines given in slope-intercept form or two-point form.
+- TR (Trigonometric Ratios): Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
 
 </details>
 
@@ -80,7 +80,7 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *To be completed...*
+- To be completed...
 
 </details>
 
@@ -90,8 +90,8 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *CoinFlipper*: Simulates the repeated flipping of a coin.
-  - *FactorCalculator4*: Lists all divisors of a given integer.
+- CoinFlipper: Simulates the repeated flipping of a coin.
+- FactorCalculator4: Lists all divisors of a given integer.
 
 </details>
 
@@ -101,9 +101,9 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *CA* (Coterminal Angles): Given an initial angle measurement, finds the coterminal angle closest to 0°.
-  - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
-  - *TR* (Trigonometric Ratios): Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
+- CA (Coterminal Angles): Given an initial angle measurement, finds the coterminal angle closest to 0°.
+- FC4 (Factor Calculator 4): Lists all divisors of a given integer.
+- TR (Trigonometric Ratios): Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
 
 </details>
 
@@ -113,7 +113,7 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
+- FC4 (Factor Calculator 4): Lists all divisors of a given integer.
 
 </details>
 
@@ -128,15 +128,15 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *CES* (Circle Equation Solver): Determines the equation of a circle through three points.
-  - *Cardinality*: Maps input integers to the even and odd numbers to illustrate that the cardinality of each set is the same as that of the integers.
-  - *CoinFlipper*: Simulates the repeated flipping of a coin.
-  - *Euler* / *Euler160* / *ProjEuler*: Provides solutions to a handful of problems from the [Project Euler](https://projecteuler.net) website.
-  - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
-  - *FC5* (Factor Calculator 5): Lists all divisors of a given integer, with an optimization for much larger inputs that have small prime factors.
-  - *Fibonacci*: Computes the entries in the Fibonacci sequence.
-  - *Pascal*: Computes the entries in Pascal's triangle.
-  - *SKI_Logic*: Defines the basic combinators of SKI combinator calculus.
+- CES (Circle Equation Solver): Determines the equation of a circle through three points.
+- Cardinality: Maps input integers to the even and odd numbers to illustrate that the cardinality of each set is the same as that of the integers.
+- CoinFlipper: Simulates the repeated flipping of a coin.
+- Euler / Euler160 / ProjEuler: Provides solutions to a handful of problems from the [Project Euler](https://projecteuler.net) website.
+- FC4 (Factor Calculator 4): Lists all divisors of a given integer.
+- FC5 (Factor Calculator 5): Lists all divisors of a given integer, with an optimization for much larger inputs that have small prime factors.
+- Fibonacci: Computes the entries in the Fibonacci sequence.
+- Pascal: Computes the entries in Pascal's triangle.
+- SKI_Logic: Defines the basic combinators of SKI combinator calculus.
 
 </details>
 
@@ -146,9 +146,9 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *BC* (Base Converter): Converts an integer between two different bases.
-  - *CES* (Circle Equation Solver): Determines the equation of a circle through three points.
-  - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
+- BC (Base Converter): Converts an integer between two different bases.
+- CES (Circle Equation Solver): Determines the equation of a circle through three points.
+- FC4 (Factor Calculator 4): Lists all divisors of a given integer.
 
 </details>
 
@@ -158,7 +158,7 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
+- FC4 (Factor Calculator 4): Lists all divisors of a given integer.
 
 </details>
 
@@ -168,7 +168,7 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
+- FC4 (Factor Calculator 4): Lists all divisors of a given integer.
 
 </details>
 
@@ -178,11 +178,11 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *ces* (Circle Equation Solver): Determines the equation of a circle through three points.
-  - *coterminal*: Given an initial angle measurement, finds the coterminal angle closest to 0°.
-  - *fc4* (Factor Calculator 4): Lists all divisors of a given integer.
-  - *repCount*: Counts the number of occurrences of a given element in a list.
-  - *test*: Experiments with small features of the Prolog language.
+- ces (Circle Equation Solver): Determines the equation of a circle through three points.
+- coterminal: Given an initial angle measurement, finds the coterminal angle closest to 0°.
+- fc4 (Factor Calculator 4): Lists all divisors of a given integer.
+- repCount: Counts the number of occurrences of a given element in a list.
+- test: Experiments with small features of the Prolog language.
 
 </details>
 
@@ -192,8 +192,8 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *FC2* (Factor Calculator 2): Lists all divisors of a given integer, without the square-root optimization.
-  - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
+- FC2 (Factor Calculator 2): Lists all divisors of a given integer, without the square-root optimization.
+- FC4 (Factor Calculator 4): Lists all divisors of a given integer.
 
 </details>
 
@@ -207,12 +207,6 @@ This should all work fairly well without any difficulties. The languages not men
 - **Blackjack**: Plays a simple game of blackjack with human or computer players against the dealer.
 - **DealOrNoDeal**: Simulates the game show [Deal or No Deal](https://en.wikipedia.org/wiki/Deal_or_No_Deal_(U.S._game_show)) for the purpose of testing different strategies.
 - **GUI Toolbox**: Provides a visual interface for many of my common math mini-projects, accessed via `main.pyw`.
-  - *BC* (Base Converter): Converts an integer between two different bases.
-  - *CA* (Coterminal Angles): Given an initial angle measurement, finds the coterminal angle closest to 0°.
-  - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
-  - *FC5* (Factor Calculator 5): Lists all divisors of a given integer, with an optimization for much larger inputs that have small prime factors.
-  - *LIC* (Line Intercept Calculator): Finds the intersection point of two lines given in slope-intercept form or two-point form.
-  - *TR* (Trigonometric Ratios): Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
 - **PartCompare**: Uses Selenium to search [UserBenchmark](https://userbenchmark.com) for computer part comparisons.
 - **Snake**: Plays a basic version of the game Snake.
 - **SudokuSolverBacktracking**: Uses backtracking to find a solution to a given Sudoku puzzle grid.
@@ -220,14 +214,14 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *CircleEquationSolver*: Determines the equation of a circle through three points.
-  - *CoinFlipper*: Simulates the repeated flipping of a coin.
-  - *FC4-Recursion* (Factor Calculator 4): Lists all divisors of a given integer.
-  - *Fibonacci*: Computes the entries in the Fibonacci sequence.
-  - *InfiniteGeometricSum*: Calculates the sum of an infinite geometric series.
-  - *PolynomialFitter*: Finds the minimal-degree polynomial function which passes through a set of points.
-  - *RadicalSimplifier*: Simplifies a radical expression by extracting perfect squares from the radicand.
-  - *TowersOfHanoi*: Finds a solution to the Towers of Hanoi puzzle.
+- CircleEquationSolver: Determines the equation of a circle through three points.
+- CoinFlipper: Simulates the repeated flipping of a coin.
+- FC4-Recursion (Factor Calculator 4): Lists all divisors of a given integer.
+- Fibonacci: Computes the entries in the Fibonacci sequence.
+- InfiniteGeometricSum: Calculates the sum of an infinite geometric series.
+- PolynomialFitter: Finds the minimal-degree polynomial function which passes through a set of points.
+- RadicalSimplifier: Simplifies a radical expression by extracting perfect squares from the radicand.
+- TowersOfHanoi: Finds a solution to the Towers of Hanoi puzzle.
 
 </details>
 
@@ -237,8 +231,8 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *FC4* (Factor Calculator 4): Lists all divisors of a given integer.
-  - *FC5* (Factor Calculator 5): Lists all divisors of a given integer, with an optimization for much larger inputs that have small prime factors.
+- FC4 (Factor Calculator 4): Lists all divisors of a given integer.
+- FC5 (Factor Calculator 5): Lists all divisors of a given integer, with an optimization for much larger inputs that have small prime factors.
 
 </details>
 
@@ -248,10 +242,10 @@ This should all work fairly well without any difficulties. The languages not men
 
 <details><summary><b>Minor Math Projects</b></summary>
 
-  - *Base Converter*: Converts an integer between two different bases.
-  - *Circle Equation Solver*: Determines the equation of a circle through three points.
-  - *Coterminal Angles*: Given an initial angle measurement, finds the coterminal angle closest to 0°.
-  - *Factor Calculator 4*: Lists all divisors of a given integer.
-  - *Trigonometric Ratios*: Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
+- Base Converter: Converts an integer between two different bases.
+- Circle Equation Solver: Determines the equation of a circle through three points.
+- Coterminal Angles: Given an initial angle measurement, finds the coterminal angle closest to 0°.
+- Factor Calculator 4: Lists all divisors of a given integer.
+- Trigonometric Ratios: Given an angle in degrees or radians, computes its sine, cosine, tangent, cosecant, secant, and cotangent.
 
 </details>
