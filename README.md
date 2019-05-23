@@ -81,6 +81,7 @@ This should all work fairly well without any difficulties. The languages not men
 ### `Haskell`
 
 - **99_Problems**: Provides solutions to many of the [ninety-nine problems in Haskell](https://wiki.haskell.org/H-99:_Ninety-Nine_Haskell_Problems).
+- **Boggle** (unfinished): Finds all possible words in a given [Boggle](https://en.wikipedia.org/wiki/Boggle) board.
 - **eightQueens**: Finds all solutions to the eight queens problem.
 - **Quicksort**: Implements quicksort for a list of integers.
 - **Minor Math Projects**
@@ -129,6 +130,7 @@ This should all work fairly well without any difficulties. The languages not men
 ### `Python`
 
 *To be continued...*
+
 - **Boggle**: Finds all possible words in a given [Boggle](https://en.wikipedia.org/wiki/Boggle) board.
 - **Blackjack**: Plays a simple game of blackjack with human or computer players against the dealer.
 - **DealOrNoDeal**: Simulates the game show [Deal or No Deal](https://en.wikipedia.org/wiki/Deal_or_No_Deal_(U.S._game_show)) for the purpose of testing different strategies.
