@@ -1,13 +1,7 @@
 *.pyc
-Python/Unfinished/Reddit Bot/botconfig.py
-Python/Unfinished/Reddit Bot/botconfig.py
-Python/No GUI/Treble/*.*
 *.mid
 C++/Eigen/
 C/mesch12b/
-GNU Assembly/ASSEMBLER.py
-GNU Assembly/*/*.bat
-GNU Assembly/*.bat
 *.exe
 *.o
 *.vo
@@ -21,3 +15,6 @@ GNU Assembly/*.bat
 *.class
 *.aux
 *.log
+*.cbp
+*.depend
+*.bat
