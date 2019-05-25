@@ -7,7 +7,7 @@ Notation "A | B" := (Nat.divide A B) (at level 0).
 
 Lemma contrapositive: forall P Q : Prop, (P -> Q) -> (~Q -> ~P).
 Proof.
-  unfold not. intros. apply (H0 (H H1)).
+  intuition.
 Qed.
 
 Lemma zeroX_is_zero: (forall x, 0 * x = 0).
@@ -119,9 +119,7 @@ Proof.
   rewrite <- cy_d.
   cut (x*y*(a*c)=a*x*(c*y)). intro xyac_axcy.
   rewrite <- xyac_axcy.
-  apply Nat.divide_factor_r.
-  rewrite Nat.mul_comm.
-  apply Nat.mul_shuffle1.
+  apply Nat.divide_factor_r. ring.
   - apply (div_implies_mul y d c D c_div_d Heqy).
   - apply Nat.lt_neq in B. apply neq_refl in B.
     apply (div_implies_mul x b a B a_div_b Heqx).
