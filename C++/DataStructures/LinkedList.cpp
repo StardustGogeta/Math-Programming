@@ -35,8 +35,8 @@ int main() {
         std::cout << "Expected: " << newArr[i] << "\tActual: " << *(L->get(i)) << std::endl;
     std::cout << std::endl;
 
-    // Test insert
-    L -> insert(0, arr);
+    // Test insert and prepend
+    L -> prepend(arr);
     L -> insert(1, arr + 1);
     for (int i = 0; i < 2; i++)
         std::cout << "Expected: " << arr[i] << "\tActual: " << *(L->get(i)) << std::endl;

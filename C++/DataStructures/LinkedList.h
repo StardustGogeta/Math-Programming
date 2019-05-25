@@ -1,11 +1,13 @@
 #pragma once
 #include <stdexcept>
+#include <ostream>
 
 /*
     This is a generic-type linked list implemented with a dummy head node.
     Member functions:
         T* get(int)
         void append(T*)
+        void prepend(T*)
         T* remove(int)
         void insert(int, T*)
         int length()
@@ -26,13 +28,12 @@ class LinkedList {
 
         // Appends element to the end of the list
         void append(T* data) {
-            if (data == nullptr)
-                throw std::invalid_argument("Invalid null argument in LinkedList::append(T*)");
-            Node *ptr = Head;
-            while (ptr -> next != nullptr)
-                ptr = ptr -> next;
-            ptr -> next = new Node(data);
-            len++;
+            insert(len, data);
+        }
+
+        // Prepends element to the start of the list
+        void prepend(T* data) {
+            insert(0, data);
         }
 
         // Removes element at a given index and returns a pointer to it
@@ -114,4 +115,22 @@ class LinkedList {
         int len = 0;
         // Dummy head node
         Node *const Head = new Node(nullptr);
+        template <typename S>
+        friend std::ostream& operator<<(std::ostream&, const LinkedList<S>*);
 };
+
+template <typename S>
+std::ostream& operator<<(std::ostream& os, const LinkedList<S>* ls) {
+    os << "[ ";
+    typename LinkedList<S>::Node *ptr = ls -> Head -> next, *next;
+    while (ptr != nullptr) {
+        os << *(ptr -> data);
+        next = ptr -> next;
+        if (next != nullptr)
+            os << ", ";
+        ptr = next;
+    }
+    os << " ]";
+    return os;
+}
+
