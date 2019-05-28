@@ -56,6 +56,9 @@ int main() {
     std::cout << "Expected: 1\tActual: " << L -> containsValue(*y) << std::endl; // Note the difference from before
     std::cout << std::endl;
 
+    // Test output operator
+    std::cout << L << " " << *L;
+
     delete L;
     return 0;
 }
