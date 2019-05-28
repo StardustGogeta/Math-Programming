@@ -19,3 +19,5 @@ C/mesch12b/
 *.depend
 *.bat
 *.layout
+*.ipch
+*.bin
