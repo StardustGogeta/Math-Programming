@@ -99,7 +99,6 @@ class LinkedList {
                 // Traverse up to one node prior to the insertion
                 for (; --index ;)
                     ptr = ptr -> next;
-                // std::cout << "HOLA " << index << " " << data << " " << len << " " << ptr << std::endl;
                 ptr -> next = new Node(data, ptr -> next);
             }
             len++;
