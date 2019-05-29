@@ -7,7 +7,7 @@
     Member functions:
         void append(const T&)
         bool contains(const T&) const
-        T get(int) const
+        const T& get(int) const
         void insert(int, const T&)
         int length() const
         void prepend(const T&)
@@ -24,7 +24,7 @@ class LinkedList {
 
         // Returns data element at given index
         // Throws std::out_of_range if index is invalid
-        T get(int index) const {
+        const T& get(int index) const {
             if (index < 0 || index >= len)
                 throw std::out_of_range("Invalid index in LinkedList::get(int)");
             Node *ptr = Head;
