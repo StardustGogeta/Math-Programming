@@ -43,7 +43,7 @@ class LinkedList {
         // Throws std::out_of_range if index is invalid
         T remove(int index) {
             if (index < 0 || index >= len)
-                throw std::out_of_range("Invalid index in LinkedList::get(int)");
+                throw std::out_of_range("Invalid index in LinkedList::remove(int)");
             Node *old;
             if (index == 0) { // Deleting the head
                 old = Head; // Save the removed node to free later
@@ -91,7 +91,7 @@ class LinkedList {
         // Throws std::out_of_range if index is invalid
         void insert(int index, const T& data) {
             if (index < 0 || index > len)
-                throw std::out_of_range("Invalid index in LinkedList::insert(int, T*)");
+                throw std::out_of_range("Invalid index in LinkedList::insert(int, const T&)");
             if (index == 0)
                 Head = new Node(data, Head);
             else {
