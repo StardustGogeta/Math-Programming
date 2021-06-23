@@ -16,7 +16,7 @@ elem.send_keys(Keys.RETURN)
 link = 0
 while not link:
     try:
-        link = driver.find_elements_by_css_selector("#rso div div h3 a")[0]
+        link = driver.find_elements_by_css_selector("#rso div div h3")[0]
     except IndexError:
         continue
 link.click()
