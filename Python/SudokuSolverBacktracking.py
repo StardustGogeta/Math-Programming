@@ -1,50 +1,55 @@
 # This is different from the other `SudokuSolver.py` file because this uses backtracking and recursion
 # rather than actually trying to solve the board like a human would.
 
+SUBS = 0
+
 class Board:
-    def __init__(self, fill = None):
-        self.arr = [list(0 for _ in range(9)) for _ in range(9)]
+    def __init__(self, n = 3, fill = None):
+        self.n = n
+        self.N = n * n
+        self.arr = [list(0 for _ in range(n * n)) for _ in range(n * n)]
         if fill:
             self.fill(fill)
 
-    @staticmethod
-    def getBoxNum(i, j): # Gets the corresponding mini-grid number for a given coordinate pair on the board
-        return (i // 3) * 3 + j // 3
+    def getBoxNum(self, i, j): # Gets the corresponding mini-grid number for a given coordinate pair on the board
+        return (i // self.n) * self.n + j // self.n
 
     def findNext(self): # Returns coords of next open spot as 2-tuple
-        for i in range(9):
-            for j in range(9):
+        for i in range(self.N):
+            for j in range(self.N):
                 if not self.arr[i][j]:
                     return (i, j)
 
     def fill(self, arr): # Fill the board using an 81-element list
-        for i in range(9):
-            for j in range(9):
-                # print(i * 9 + j)
-                self.arr[i][j] = arr[i * 9 + j]
+        for i in range(self.N):
+            for j in range(self.N):
+                # print(i * self.N + j)
+                self.arr[i][j] = arr[i * self.N + j]
 
     def set(self, i, j, val): # Place an element into the board
+        global SUBS
+        SUBS += 1
         self.arr[i][j] = val
 
     def getAll(self): # Dump all elements of the board
         return [elem for row in self.arr for elem in row]
 
     def getBox(self, box): # Get the box of nine squares in a region of the board
-        return [elem for i in range((box // 3) * 3, (box // 3) * 3 + 3) for elem in self.arr[i][(box % 3) * 3 : (box % 3) * 3 + 3]]
+        return [elem for i in range((box // self.n) * self.n, (box // self.n) * self.n + self.n) for elem in self.arr[i][(box % self.n) * self.n : (box % self.n) * self.n + self.n]]
 
     def valid(self, coords = None): # Return whether the board is valid or not, optionally in a specific row and column
         if coords is None:
             for row in self.arr:
-                if len(set(row)) != 9:
+                if len(set(row)) != self.N:
                     return False
-            for j in range(9):
-                if len(set(self.arr[i][j] for i in range(9))) != 9:
+            for j in range(self.N):
+                if len(set(self.arr[i][j] for i in range(self.N))) != self.N:
                     return False
-            for box in range(9):
+            for box in range(self.N):
                 if not self.validBox(box):
                     return False
             return True
-        return validSet(self.arr[coords[0]]) and validSet(self.arr[i][coords[1]] for i in range(9)) and self.validBox(Board.getBoxNum(*coords))
+        return validSet(self.arr[coords[0]]) and validSet(self.arr[i][coords[1]] for i in range(self.N)) and self.validBox(self.getBoxNum(*coords))
 
     def validBox(self, box):
         return validSet(self.getBox(box))
@@ -62,7 +67,7 @@ def solve(board): # Solves a Board object
         if board.valid():
             return board
         return False # Otherwise, fail
-    for val in range(1, 10): # Iterate through all possible values in the first empty space
+    for val in range(1, board.N + 1): # Iterate through all possible values in the first empty space
         board.set(*coords, val) # Set the value
         if board.valid(coords): # Check if the row, column, or mini-grid have duplicate entries
             sol = solve(board) # Solve the rest of the board
@@ -85,5 +90,7 @@ sample = [0, 6, 5, 7, 4, 2, 0, 9, 0,
 sudoku = Board()
 sudoku.fill(sample)
 print(solve(sudoku))
+
+print(SUBS)
 
 
