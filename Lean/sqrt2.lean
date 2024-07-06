@@ -1,16 +1,18 @@
 import Batteries
 import Mathlib.Algebra.Ring.Parity
 import Mathlib.Data.Nat.Prime.Basic
+import Mathlib.Data.Rat.Cast.CharZero
+import Mathlib.Data.Int.Defs
+import Mathlib.Algebra.Order.Group.Abs
+import Mathlib.Data.Int.Defs
 
 theorem weak_sqrt2_is_irrational: ∀ p q, q ≠ 0 ∧ Nat.Coprime p q -> p ^ 2 ≠ q ^ 2 * 2 := by
   intro p q hq
   obtain ⟨ hq, h ⟩ := hq
   by_contra h2
   have h3 : (Even (p ^ 2)) := by
-    rw [Even]
     use q ^ 2
-    rw [← mul_two]
-    apply h2
+    omega
   have h4 : Even p := by
     rw [Nat.even_pow'] at h3
     apply h3
@@ -20,26 +22,18 @@ theorem weak_sqrt2_is_irrational: ∀ p q, q ≠ 0 ∧ Nat.Coprime p q -> p ^ 2 
   rw [← mul_two] at hk
   rw [hk] at h2
   have ksq : (k * 2) ^ 2 = k ^ 2 * 4 := by
-    repeat rw [Nat.pow_two]
-    rw [mul_assoc, mul_assoc]
+    repeat rw [Nat.pow_two, mul_assoc]
     rw [Nat.mul_left_cancel_iff]
     omega
     by_contra hk0
-    push_neg at hk0
-    rw [Nat.le_zero_eq] at hk0
-    rw [hk0, zero_mul, zero_pow, Nat.zero_eq_mul] at h2
-    cases' h2 with h2 h2
-    rw [pow_two, Nat.mul_eq_zero, or_self] at h2
-    repeat tauto
+    simp_all
   rw [ksq] at h2
   have : 4 = 2 * 2 := by
     tauto
   rw [this, ← mul_assoc, Nat.mul_right_cancel_iff] at h2
   have h5 : Even (q ^ 2) := by
     use k ^ 2
-    rw [← mul_two]
-    symm
-    apply h2
+    omega
   rw [Nat.even_pow'] at h5
   have h6 : ¬ p.Coprime q := by
     rw [Nat.Prime.not_coprime_iff_dvd]
@@ -54,7 +48,7 @@ theorem weak_sqrt2_is_irrational: ∀ p q, q ≠ 0 ∧ Nat.Coprime p q -> p ^ 2 
     apply h5
   repeat tauto
 
-theorem sqrt2_is_irrational: ∀ p q, q ≠ 0 -> p ^ 2 ≠ q ^ 2 * 2 := by
+theorem strong_sqrt2_is_irrational: ∀ p q, q ≠ 0 -> p ^ 2 ≠ q ^ 2 * 2 := by
   intro p q hq
   by_cases h : Nat.Coprime p q
   apply weak_sqrt2_is_irrational
@@ -84,3 +78,34 @@ theorem sqrt2_is_irrational: ∀ p q, q ≠ 0 -> p ^ 2 ≠ q ^ 2 * 2 := by
   apply Nat.zero_lt_of_ne_zero hq
   apply Nat.gcd_pos_of_pos_right
   apply Nat.zero_lt_of_ne_zero hq
+
+theorem int_ge_zero_exists_nat: ∀ x : ℤ, x ≥ 0 → ∃ n : ℕ, x = n := by
+  intro x h
+  use x.natAbs
+  omega
+
+lemma lemma_sqrt_2_is_irrational: ∀ x : ℚ, x.num ≥ 0 → x.num ^ 2 ≠ 2 * ↑x.den ^ 2 := by
+  intro x x_pos h
+  have h1 := int_ge_zero_exists_nat x.num x_pos
+  obtain ⟨ x_abs, h1 ⟩ := h1
+  have h2 := strong_sqrt2_is_irrational x_abs x.den
+  have h3 : x.den ≠ 0 := by simp_all
+  apply h2 h3
+  simp_all
+  rw [mul_comm] at h2
+  apply h2
+  rw [← Int.natCast_inj, Int.natCast_pow, Int.natCast_mul, Int.natCast_pow]
+  apply h
+
+theorem sqrt2_is_irrational: ¬ ∃ x : ℚ, x ^ 2 = 2 := by
+  push_neg
+  intro x h
+  rw [Rat.eq_iff_mul_eq_mul] at h
+  simp_all
+  by_cases x_pos : x.num ≥ 0
+  apply lemma_sqrt_2_is_irrational x x_pos h
+  have neg_x_pos : -x.num >= 0 := by omega
+  apply lemma_sqrt_2_is_irrational (-x) neg_x_pos
+  simp_all
+
+#check sqrt2_is_irrational
