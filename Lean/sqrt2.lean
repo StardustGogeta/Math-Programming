@@ -5,6 +5,7 @@ import Mathlib.Data.Rat.Cast.CharZero
 import Mathlib.Data.Int.Defs
 import Mathlib.Algebra.Order.Group.Abs
 import Mathlib.Data.Int.Defs
+import Mathlib.Data.Real.Irrational
 
 theorem weak_sqrt2_is_irrational: ∀ p q, q ≠ 0 ∧ Nat.Coprime p q -> p ^ 2 ≠ q ^ 2 * 2 := by
   intro p q hq
@@ -79,25 +80,16 @@ theorem strong_sqrt2_is_irrational: ∀ p q, q ≠ 0 -> p ^ 2 ≠ q ^ 2 * 2 := b
   apply Nat.gcd_pos_of_pos_right
   apply Nat.zero_lt_of_ne_zero hq
 
-theorem int_ge_zero_exists_nat: ∀ x : ℤ, x ≥ 0 → ∃ n : ℕ, x = n := by
-  intro x h
-  use x.natAbs
-  omega
-
 lemma lemma_sqrt_2_is_irrational: ∀ x : ℚ, x.num ≥ 0 → x.num ^ 2 ≠ 2 * ↑x.den ^ 2 := by
   intro x x_pos h
-  have h1 := int_ge_zero_exists_nat x.num x_pos
-  obtain ⟨ x_abs, h1 ⟩ := h1
-  have h2 := strong_sqrt2_is_irrational x_abs x.den
+  have h2 := strong_sqrt2_is_irrational x.num.natAbs x.den
   have h3 : x.den ≠ 0 := by simp_all
   apply h2 h3
   simp_all
-  rw [mul_comm] at h2
-  apply h2
-  rw [← Int.natCast_inj, Int.natCast_pow, Int.natCast_mul, Int.natCast_pow]
-  apply h
+  rw [mul_comm, ← Int.natCast_inj] at h2
+  simp_all
 
-theorem sqrt2_is_irrational: ¬ ∃ x : ℚ, x ^ 2 = 2 := by
+lemma sqrt2_is_irrational_alt: ¬ ∃ x : ℚ, x ^ 2 = 2 := by
   push_neg
   intro x h
   rw [Rat.eq_iff_mul_eq_mul] at h
@@ -108,4 +100,17 @@ theorem sqrt2_is_irrational: ¬ ∃ x : ℚ, x ^ 2 = 2 := by
   apply lemma_sqrt_2_is_irrational (-x) neg_x_pos
   simp_all
 
+theorem sqrt2_is_irrational: Irrational √2 := by
+  rw [Irrational]
+  by_contra h
+  obtain ⟨ sqrt2, h ⟩ := h
+  apply sqrt2_is_irrational_alt
+  use sqrt2
+  have square_both_sides: ∀ x y : ℝ, x = y → x ^ 2 = y ^ 2 := by simp
+  apply square_both_sides at h
+  have rat_to_real: ∀ x y : ℚ, x = y ↔ x = (@Rat.cast ℝ Real.instRatCast y) := by simp
+  rw [rat_to_real]
+  simp_all
+
 #check sqrt2_is_irrational
+
